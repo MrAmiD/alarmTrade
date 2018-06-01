@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title><---DevLayouts</title>
+	<meta name="description" content="">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<meta property="og:image" content="path/to/image.jpg">
+	<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png">
+
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#000">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#000">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+
+	<style>body { opacity: 0; overflow-x: hidden; } html { background-color: #fff; }</style>
+
+
+
+
+	<!-- Web Font / @font-face : BEGIN -->
+	<!-- NOTE: If web fonts are not required, lines 9 - 26 can be safely removed. -->
+
+	<!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
+	<!--[if mso]>
+	<style>
+		* {
+			font-family: sans-serif !important;
+		}
+	</style>
+	<![endif]-->
+
+	<!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+	<!--[if !mso]><!-->
+	<!-- insert web font reference, eg: <link href='https://praweb.ru/theme/fonts/main/fonts.css' rel='stylesheet' type='text/css'> -->
+	<!--<![endif]-->
+
+	<!-- Web Font / @font-face : END -->
+
+</head>
+
+<body>
+
+<!--Top Arrow start-->
+<a href="javascript:" id="return-to-top">
+	<i class="fa fa-chevron-up" aria-hidden="true"></i>
+</a>
+<!--Top Arrow end-->
+
+<div id="my-header">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="menu-m-b hidden-lg-only">
+					<a href="#my-menu" class="hamburger hamburger--squeeze js-hamburger" type="button" id="menu-btn">
+		          <span class="hamburger-box">
+		              <span class="hamburger-inner"></span>
+		          </span>
+					</a>
+					<nav id="my-menu">
+					</nav>
+				</div>
+			</div>
+			<div class="col hidden-md-down">
+				<div class="main-menu">
+					<ul>
+						<li data-trigger="#vaka" ><a href="javascript:void(0)">
+							Вакансии
+						</a></li>
+						<li data-trigger="#slider-object"><a href="javascript:void(0)">
+							Объекты строительства
+						</a></li>
+						<li data-trigger="#about-company"><a href="javascript:void(0)">
+							О компании
+						</a>
+						</li>
+						<li data-trigger="#employer"><a href="javascript:void(0)">
+							Гарантии
+						</a></li>
+						<li data-trigger="#feedback"><a href="javascript:void(0)">
+							Отзывы
+						</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div id="my-content" class="main-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 ">
+				<div class="h1">
+					BootstrapV4
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">col1</div>
+			<div class="col">col1</div>
+			<div class="col">col1</div>
+			<div class="col">col1</div>
+			<div class="col">col1</div>
+		</div>
+		<div class="row">
+			<div class="col content">
+				<div class="h1">
+					AIR DATEPICKER
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input type='text' data-timepicker="true" class="datepicker-here" data-position="right top" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="h1">Slick Slider</div>
+			</div>
+			<div class="col-12">
+				<div class="main-slider">
+					<div class="item">
+						<div class="prev" style="background-image: url('img/slider.jpg')">
+						</div>
+						<div class="content-c">
+							Мостовой переход через <br>
+							реку Чусовую в Перми
+						</div>
+					</div>
+					<div class="item">
+						<div class="prev" style="background-image: url('img/slider2.jpg')">
+						</div>
+						<div class="content-c">
+							Мостовой переход через <br>
+							реку Чусовую в Перми
+						</div>
+					</div>
+					<div class="item">
+						<div class="prev" style="background-image: url('img/slider3.jpg')">
+						</div>
+						<div class="content-c">
+							Мостовой переход через <br>
+							реку Чусовую в Перми
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+</div>
+
+<div id="my-footer">
+
+</div>
+
+
+
+<!--Modal for all pages start-->
+<div data-fancybox="" data-src="#consult">
+	<div id="consult" class="white-popup" style="display: none">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 ">
+					<!--start callback_form-->
+					<div class="h4">
+						Обратная связь
+					</div>
+					<form>
+						<input type="hidden"  name="theme" value="Заявка на обратный звонок на странице Главная">
+						<input type="text" placeholder="Имя*" id="name" name="name">
+						<input type="tel" placeholder="Телефон*" id="phone" name="phone">
+						<textarea name="" id="msg-c" cols="30" rows="5" placeholder="Сообщение"></textarea>
+						<p style="font-size: 12px">
+							Нажимая "Отправить", Я подтверждаю, что ознакомлен с <a href="" target="_blank">политикой конфиденциальности</a> и даю согласие на обработку своих персональных данных.
+						</p>
+						<button type="" name="callback_form" class="btn-accent" value="Заказать">Отправить</button>
+					</form>
+					<!--start callback_form-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div data-fancybox="" data-src="#ty">
+	<div id="ty" class="popup white-popup" style="display: none">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 ">
+					<div class="h1 text-center">
+						Спасибо за Заявку!
+					</div>
+					<div class="h3 text-center txt-accent">
+						Наш менеджер свяжется с Вами в ближайшее время.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Modal for all pages end-->
+
+<!--For all pages START-->
+<link rel="stylesheet" href="css/main.min.css">
+<link rel="stylesheet" href="css/custom.css">
+<script src="js/scripts.min.js"></script>
+<script src="js/common.js"></script>
+<!--For all pages END-->
+<!--For this pages START-->
+
+<!--For this pages END-->
+
+<script>
+	/*For this page START*/
+	MainSliderInit();
+	/*For this page END*/
+
+	/*For all pages START*/
+	$(function() {
+		$('input[type="tel"]').mask("+7 (999) 999-9999");
+
+		/*Открытие подменю на мобильной версии в шапке сайта*/
+		$('.headSubmOpen').on('click', function () {
+			if($(this).hasClass('active')){
+				$(this).removeClass('active');
+				$('.js-headSubm').slideUp();
+			}
+			else {
+				$(this).addClass('active');
+				$('.js-headSubm').slideDown();
+			}
+		});
+
+		$(window).resize(function () {
+//			$('.headSubmOpen').addClass('active');
+//			$('.js-headSubm').slideDown();
+		});
+
+	});
+	/*For all pages END*/
+</script>
+
+</body>
+</html>
