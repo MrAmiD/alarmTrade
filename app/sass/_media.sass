@@ -8,10 +8,30 @@
 
 //Large: ≥992px
 +media-breakpoint-down(lg)
-  /**/
-
+  .contacts-h .phone
+    font-size: 19px
+  .lvl2-h .logo-c p
+    line-height: 1.4
+  .lvl2-h .main-discr
+    font-size: 20px
+  .signals-r .signals-c .cont-c .h2 strong
+    font-size: 28px
+  .signals-r .signals-c .signals-i .svg-c
+    top: 69px
+  .tab-trigger-r .tab-trigger-c .tab-trigger-i button
+    padding: 20px 10px
 //Medium: ≥768px
 +media-breakpoint-down(md)
+  .signals-r .signals-c .signals-i .prev-c:after
+    left: unset
+    transform: translate(370px, 0)
+  .main-slider .slick-dots
+    bottom: 5px
+  .main-slider .item .content-c
+    background: rgba(#ffffff, 0.8)
+    border-radius: 3px
+  .tab-trigger-r .tab-trigger-c .tab-trigger-i button
+    margin-right: 5px
   .content
     table
       overflow-x: scroll
@@ -21,14 +41,112 @@
         display: block
         min-width: 500px
         width: 100%
+  .btn-find
+    margin-left: 0px
+  .main-menu-c
+    .main-menu
+      ul
+        display: none
+  .main-menu-r
+    align-items: center
+  .menu-m-c
+    display: block
+    height: 100%
+  .menu-m-b
+    height: 100%
+    display: flex
+    justify-content: flex-end
+  .lvl2-h .main-discr
+    display: none
+  .lvl2-h .logo-c
+    margin-bottom: 15px
+  .main-slider .item .content-c
+    left: 0px
+  .lvl1-f .cont-c
+    margin-top: 30px
+  .sidebar-stat ul
+    flex-direction: row
+  .sidebar-stat ul li
+    margin-bottom: 0px
+    margin-right: 15px
+    &:last-child
+      margin-right: 0px
+  .sidebar-stat
+    top: unset
+    bottom: 11px
+    right: unset
+    left: 20px
+    transform: none
+  .sidebar-stat ul li
+    width: 50px
+    height: 50px
+    min-height: 50px
+    min-width: 50px
+  .sidebar-stat ul li:after
+    top: 3px
+    right: 3px
+    left: 3px
+    bottom: 3px
+  .sidebar-stat ul li:before
+    right: 0px
+    top: 0px
 //Small: ≥576px
 +media-breakpoint-down(sm)
-  /**/
+  .lvl1-f
+    .menu-f
+      margin-top: 30px
+  .preim-c .preim-i
+    margin-bottom: 30px
+  .tab-trigger-r .tab-trigger-c .tab-trigger-i
+    overflow: auto
+  .signals-r .signals-c .signals-i .prev-c:after
+    transform: translate(144px,0)
+  .signals-r .signals-c .signals-i .svg-c
+    top: 43px
+  .main-slider .item .h1
+    font-size: 22px
+  .main-slider .item .content-c p
+    line-height: 1.6
+  .main-slider .item .content-c
+    padding: 30px
+    height: 100%
+  .standart-sec .h2
+    font-size: 24px
+  .signals-r .signals-c .cont-c
+    flex-direction: column
+    align-items: flex-start
+  .signals-r .signals-c .cont-c .h2
+    font-size: 19px
+    margin-bottom: 10px
+  .signals-r .signals-c .cont-c .h2 strong
+    font-size: 30px
+
 //Extra small: >0
 +media-breakpoint-down(xs)
-	/**/
-
-
+  .payments-c .pay-i
+    margin-top: 15px
+  .lvl1-f .cont-s .h3
+    margin-bottom: 15px
+  .lvl1-f
+    *
+      text-align: center
+      justify-content: center
+    .logo-c
+      text-align: center
+      justify-content: center
+  .signals-r .signals-c .signals-i .prev-c:after
+    transform: translate(0,0)
+    border-width: 0 1040px 170px 724px
+  .signals-r .signals-c .signals-i .svg-c
+    top: unset
+    bottom: 20px
+    right: 20px
+  .lvl2-h .logo-c p
+    font-size: 14px
+  .lvl2-h
+    padding: 18px 0px
+  .preim-c .h2
+    font-size: 20px
 /*==========  Mobile First  ==========*/
 
 //Extra small: <576px
