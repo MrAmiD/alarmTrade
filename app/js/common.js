@@ -117,6 +117,11 @@ $(document).on('click', '.tab-trigger-r .tab-trigger-c .tab-trigger-i button', f
     console.log('index = ', $(this).index())
 
 });
+$(document).on('click', '.garmoshka-r .garmoshka-c .js-triger-g', function () {
+
+    $(this).next('.content-tr').slideToggle();
+
+});
 
 $(function() {
     /*datepicker start*/

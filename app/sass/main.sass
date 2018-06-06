@@ -514,31 +514,35 @@ html.mm-opening .mm-menu~.mm-slideout
 				content: counter(item) ') '
 				counter-increment: item
 
+.bread-c
+	.container
+		border-bottom: solid 1px rgba(#c6c6c6, 0.65)
+
 .breadcrumb
 	padding: 0
-	margin-bottom: 20px
 	list-style: none
 	background-color: transparent
 	-webkit-border-radius: 4px
 	border-radius: 4px
-	margin: 15px 0px
-	margin-top: 45px
+	margin: 20px 0px
 	text-align: left
-	padding-left: 49px
+	*
+		font-family: $default-font2!important
 	li
 		display: inline-block
 		font-size: 14px
+		color: $accent
 		&.active
 			span
 				border-bottom: solid 1px #989898
-				color: #989898
+				color: $accent
 		a
-			color: #989898
+			color: $dark
 			&:hover, &:focus
 				color: $accent
 				text-decoration: none
 	&>li+li:before
-		content: " | "
+		content: " / "
 		padding: 0 10px
 		color: $dark
 		font-weight: 500
@@ -768,6 +772,11 @@ html.mm-opening .mm-menu~.mm-slideout
 	border-radius: 5px
 	font-size: 23px
 	color: #FFFFFF
+	transition: all .3s ease
+	&.btn-small
+		font-size: 14px
+		margin-top: 15px
+		padding: 10px 15px
 	&:hover, &:focus
 		background: $dark
 		color: #FFFFFF
@@ -1003,11 +1012,10 @@ button
 				border-radius: 3px
 				display: flex
 				align-items: center
-			.svg-c
-				margin-left: 10px
 				&:hover
 					background: $dark
-
+			.svg-c
+				margin-left: 10px
 			ul
 				padding: 0px
 			&:hover>.subm
@@ -1043,7 +1051,7 @@ button
 						font-weight: 500
 						&:hover
 							color: $accent
-							background: transparent
+							background: transparent!important
 
 
 .main-slider
@@ -1561,6 +1569,152 @@ button
 				border-radius: 100%
 				pointer-events: none
 
+.txt-accent
+	color: $accent
+
+.city-select
+	display: flex
+	align-items: center
+	justify-content: flex-end
+	height: 100%
+	.svg-c
+		margin-right: 8px
+	.txt-accent
+		margin-left: 15px
+#my-content
+	min-height: 70vh
+
+.jq-selectbox
+	max-width: 100%
+	width: 100%
+	border-color: transparent!important
+	.jq-selectbox__dropdown
+		min-width: 250px
+		top: 35px!important
+	.jq-selectbox__select
+		background: #FFFFFF
+		box-shadow: none
+		font-family: $default-font
+		border-color: transparent!important
+		line-height: 36px
+		height: 36px
+		margin-bottom: 0px
+		padding-right: 0px
+	.jq-selectbox__trigger
+		border-color: transparent
+		display: none
+	li
+		transition: none
+		&:hover
+			background-color: $accent!important
+		&.selected.sel
+			background: lighten($accent, 10)
+	ul
+		max-width: 100%
+	.jq-selectbox__dropdown
+		max-width: 100%
+	.jq-selectbox__trigger
+		background-repeat: no-repeat
+		background-position: center
+		background-image: none
+		border-left: solid 1px transparent
+	.jq-selectbox__trigger-arrow
+		border: none
+	.jq-selectbox__select-text
+		max-width: 100%
+		color: $accent
+		font-size: 14px
+		font-weight: 700
+		min-width: 100px
+	li
+		white-space: inherit
+
+.title-page
+	text-align: center
+	margin: 50px 0px
+
+.garmoshka-r
+	.garmoshka-c
+		.garmoshka-i
+			background-color: #ffffff
+			margin-bottom: 8px
+		.svg-cc
+			width: 40px
+			height: 40px
+			border-right: solid 1px rgba(47, 47, 47, 0.18)
+			display: flex
+			align-items: center
+			justify-content: center
+			cursor: pointer
+		.js-triger-g 
+			display: flex
+			align-items: center
+			transition: all .3s ease
+			cursor: pointer
+			border: solid 1px rgba(47, 47, 47, 0.18)
+			border-radius: 3px
+			.svg-c
+				width: 23px
+				height: 23px
+				border: solid 1px rgba(47, 47, 47, 0.18)
+				border-radius: 100%
+			&:hover
+				background: $accent
+				.svg-c
+					background: #FFFFFF
+				a
+					color: #FFFFFF
+					text-decoration: none
+		a
+			font-size: 16px
+			font-weight: 700
+			text-decoration: underline
+			margin-left: 15px
+			&:hover, &:focus
+				color: $dark
+		.content-tr
+			padding: 26px
+			background: #f2f2f2
+			display: none
+			.svg-c
+				margin-right: 10px
+			.txt-h
+				font-size: 16px
+				font-weight: 700
+				text-decoration: underline
+				margin-left: 0px
+				&:hover, &:focus
+					color: $dark
+			a:not(.txt-h)
+				margin-left: 0px
+				font-size: 14px
+				color: $accent
+				text-decoration: none
+
+		ul
+
+			list-style: none
+			padding: 0px
+			margin: 0px
+			margin-top: 24px
+			li
+				padding-left: 23px
+				margin-bottom: 15px
+				position: relative
+				font-weight: 700
+				font-size: 14px
+				&:before
+					content: ''
+					position: absolute
+					left: 5px
+					top: 5px
+					width: 0
+					height: 0
+					border-style: solid
+					border-width: 4px 0 4px 6px
+					border-color: transparent transparent transparent #007bff
+				&:last-child
+					margin-bottom: 0px
 /*Project end*/
 
 
