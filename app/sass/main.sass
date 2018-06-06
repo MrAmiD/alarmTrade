@@ -1295,6 +1295,25 @@ button
 			border-color: $accent2 transparent transparent transparent
 			left: 50%
 			transform: translate(-50%, 0)
+	&.short-cart
+		.cheep-c
+			display: none
+		.btn-c
+			display: none
+		.tab-content-i
+			position: relative
+			transition: all .3s
+		&:hover
+			.tab-content-i
+				position: absolute
+				background: #FFFFFF
+				z-index: 10
+				left: 0px
+				border-color: $dark
+			.cheep-c
+				display: flex
+			.btn-c
+				display: flex
 	.tab-content-i
 		border: solid 1px rgba(49, 49, 49, 0.15)
 		padding: 10px
@@ -1598,51 +1617,51 @@ button
 		margin-left: 15px
 #my-content
 	min-height: 70vh
-
-.jq-selectbox
-	max-width: 100%
-	width: 100%
-	border-color: transparent!important
-	.jq-selectbox__dropdown
-		min-width: 250px
-		top: 35px!important
-	.jq-selectbox__select
-		background: #FFFFFF
-		box-shadow: none
-		font-family: $default-font
+.city-select
+	.jq-selectbox
+		max-width: 100%
+		width: 100%
 		border-color: transparent!important
-		line-height: 36px
-		height: 36px
-		margin-bottom: 0px
-		padding-right: 0px
-	.jq-selectbox__trigger
-		border-color: transparent
-		display: none
-	li
-		transition: none
-		&:hover
-			background-color: $accent!important
-		&.selected.sel
-			background: lighten($accent, 10)
-	ul
-		max-width: 100%
-	.jq-selectbox__dropdown
-		max-width: 100%
-	.jq-selectbox__trigger
-		background-repeat: no-repeat
-		background-position: center
-		background-image: none
-		border-left: solid 1px transparent
-	.jq-selectbox__trigger-arrow
-		border: none
-	.jq-selectbox__select-text
-		max-width: 100%
-		color: $accent
-		font-size: 14px
-		font-weight: 700
-		min-width: 100px
-	li
-		white-space: inherit
+		.jq-selectbox__dropdown
+			min-width: 250px
+			top: 35px!important
+		.jq-selectbox__select
+			background: #FFFFFF
+			box-shadow: none
+			font-family: $default-font
+			border-color: transparent!important
+			line-height: 36px
+			height: 36px
+			margin-bottom: 0px
+			padding-right: 0px
+		.jq-selectbox__trigger
+			border-color: transparent
+			display: none
+		li
+			transition: none
+			&:hover
+				background-color: $accent!important
+			&.selected.sel
+				background: lighten($accent, 10)
+		ul
+			max-width: 100%
+		.jq-selectbox__dropdown
+			max-width: 100%
+		.jq-selectbox__trigger
+			background-repeat: no-repeat
+			background-position: center
+			background-image: none
+			border-left: solid 1px transparent
+		.jq-selectbox__trigger-arrow
+			border: none
+		.jq-selectbox__select-text
+			max-width: 100%
+			color: $accent
+			font-size: 14px
+			font-weight: 700
+			min-width: 100px
+		li
+			white-space: inherit
 
 .title-page
 	text-align: center
@@ -1819,6 +1838,183 @@ button
 			background: $accent
 			color: #FFFFFF
 			border-radius: 3px
+.leftside-fltr
+	border: solid 1px rgba(0, 0, 0, 0.22)
+	.title-fltr
+		font-size: 15px
+		font-weight: 700
+		text-align: center
+		padding: 15px
+		border-bottom: solid 1px rgba(0, 0, 0, 0.22)
+	.fltr-group
+		border-bottom: solid 1px rgba(0, 0, 0, 0.22)
+		padding: 14px
+		&:last-child
+			border: none
+	.btn-c
+		text-align: center
+		.btn-accent
+			width: 100%
+			text-align: center
+			margin-top: 0px
+	.jq-selectbox
+		max-width: 100%
+		width: 100%
+		border-color: rgba(0, 0, 0, 0.22)!important
+		margin-bottom: 12px
+		.placeholder
+			color: $dark
+		.jq-selectbox__dropdown
+			min-width: 250px
+			top: 35px!important
+		.jq-selectbox__select
+			background: #FFFFFF
+			box-shadow: none
+			font-family: $default-font
+			border-color: rgba(0, 0, 0, 0.22)!important
+			line-height: 36px
+			height: 36px
+			margin-bottom: 0px
+		.jq-selectbox__trigger
+			border-color: transparent
+		li
+			transition: none
+			&:hover
+				background-color: $accent!important
+			&.selected.sel
+				background: lighten($accent, 10)
+		ul
+			max-width: 100%
+		.jq-selectbox__dropdown
+			max-width: 100%
+		.jq-selectbox__trigger
+			background-repeat: no-repeat
+			background-position: center
+			background-image: url("../img/arrowSelect.png")
+			border-left: solid 1px transparent
+		.jq-selectbox__trigger-arrow
+			border: none
+		.jq-selectbox__select-text
+			max-width: 100%
+		li
+			white-space: inherit
+			&:nth-child(odd)
+				background: lighten($grey, 30)
+
+.catalog-view
+	border: solid 1px rgba(18, 18, 18, 0.24)
+	padding: 8px
+	display: flex
+	justify-content: space-between
+	align-items: center
+	.v1
+		display: flex
+		button
+			background: #FFFFFF
+			display: flex
+			align-items: center
+			justify-content: center
+	.left-v
+		display: flex
+		align-items: center 
+	.v-count
+		margin-left: 15px
+		display: flex
+		align-items: center
+		.txt
+			margin-right: 30px
+			font-size: 12px
+		button
+			background: transparent
+			font-size: 12px
+			min-width: 24px
+			min-height: 24px
+			border-radius: 100px
+			&.active
+				background: $accent2
+				color: #FFFFFF
+	.right-v
+		display: flex
+		align-items: center
+		.txt
+			font-size: 12px
+			margin-right: 10px
+			white-space: nowrap
+		.jq-selectbox
+			max-width: 100%
+			width: 100%
+			border-color: rgba(0, 0, 0, 0.22)!important
+			margin-bottom: 0px
+			min-width: 188px
+			.placeholder
+				color: #FFFFFF
+				text-shadow: none
+			.jq-selectbox__dropdown
+				min-width: 250px
+				top: 35px!important
+			.jq-selectbox__select
+				background: #FFFFFF
+				box-shadow: none
+				font-family: $default-font
+				border-color: rgba(0, 0, 0, 0.22)!important
+				line-height: 36px
+				height: 36px
+				margin-bottom: 0px
+				background: $accent
+			.jq-selectbox__trigger
+				border-color: transparent
+			li
+				transition: none
+				&:hover
+					background-color: $accent!important
+				&.selected.sel
+					background: lighten($accent, 10)
+			ul
+				max-width: 100%
+			.jq-selectbox__dropdown
+				max-width: 100%
+			.jq-selectbox__trigger
+				background-repeat: no-repeat
+				background-position: center
+				background-image: url("../img/arrowSelectW.png")
+				border-left: solid 1px transparent
+			.jq-selectbox__trigger-arrow
+				border: none
+			.jq-selectbox__select-text
+				max-width: 100%
+				text-shadow: none
+				color: #FFFFFF
+				font-size: 12px
+			li
+				white-space: inherit
+				&:nth-child(odd)
+					background: lighten($grey, 30)
+
+.catalog-cv
+	.tab-content-c
+		padding: 0px 15px
+
+.jq-checkbox
+	outline: none!important
+	border-color: $accent
+	background: #FFFFFF
+	width: 20px
+	height: 20px
+	&.focused
+		background: #FFFFFF
+	&.checked
+		background: $accent
+		border: none
+.txt-grey
+	color: #c8c8c8
+.jq-checkbox.checked .jq-checkbox__div
+	width: 9px
+	height: 7px
+	margin: 5px 0 0 5px
+	border-bottom: 2px solid #FFFFFF
+	border-left: 2px solid #FFFFFF
+	transform: rotate(-50deg)
+
 
 /*Project end*/
 

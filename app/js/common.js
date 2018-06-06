@@ -157,7 +157,7 @@ $(function() {
         $('.js-single-i input[type=checkbox]').not(this).prop('checked', false);
     }); 
     //setInvest start
-    $('select').styler({
+    $('input, select').styler({
         selectSearch: true,
     });
     //setInvest end
