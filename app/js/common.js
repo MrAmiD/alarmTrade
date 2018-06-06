@@ -123,6 +123,15 @@ $(document).on('click', '.garmoshka-r .garmoshka-c .js-triger-g', function () {
 
 });
 
+function imgIntoFancybox() {
+    $('.typepage .content').find('img').each(function(index, element) {
+        var imgSrc = $(element).attr('src'),
+            wrapTxt = '<a data-fancybox="typepage-gal" href="'+imgSrc+'"></a>';
+
+        $(element).wrap(wrapTxt);
+    });
+}
+
 $(function() {
     /*datepicker start*/
 
@@ -218,4 +227,7 @@ $(function() {
         //bugfix fixed menu 3 END
         $("#my-header").css({ top: 0});
     });
+
+    imgIntoFancybox();
+
 });

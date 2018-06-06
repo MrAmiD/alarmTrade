@@ -358,69 +358,29 @@ html.mm-opening .mm-menu~.mm-slideout
 	//align-items: flex-start
 	justify-content: center
 .content
-	overflow-x: hidden
-	h1
-		text-align: center
+	.h1, h1
 		font-family: $default-font
-		margin-top: 63px
-		font-size: 30px
-		text-transform: uppercase
-		position: relative
-		//padding-bottom: 55px
-		margin-bottom: 14px
-		//&:after
-		//	content: ''
-		//	position: absolute
-		//	width: 3px
-		//	height: 50px
-		//	background: $accent
-		//	left: 50%
-		//	transform: translateX(-50%)
-		//	bottom: -6px
-	h2
-		font-size: 24px
-		font-weight: 500
-		margin: 15px 0
-		margin-top: 30px
-		text-transform: uppercase
-		color: $accent
-	h3
-		font-size: 22px
-		font-weight: 500
-		margin: 15px 0
-		margin-top: 30px
-		text-transform: uppercase
-		color: $accent
-	h4
-		font-size: 20px
-		font-weight: 500
-		margin: 15px 0
-		margin-top: 30px
-		text-transform: uppercase
-		color: $accent
-	h5
+		font-size: 36px
+		color: $dark
+		font-weight: 900
+	.h2, h2
+		font-family: $default-font
+		font-weight: 900
+		font-size: 25px
+		color: $dark
+	.h3, h3, .h4, h4, .h5, h5
+		font-family: $default-font
 		font-size: 18px
-		font-weight: 500
-		margin: 15px 0
-		margin-top: 30px
-		text-transform: uppercase
-		color: $accent
-	h6
-		font-size: 16px
-		font-weight: 500
-		margin: 15px 0
-		margin-top: 30px
-		text-transform: uppercase
-		color: $accent
+		font-weight: 900
+		color: $dark
 	b
 		font-size: 16px
 		font-weight: 900
 	p
-		font-size: 16px
-		line-height: 26px
+		font-size: 14px
 		margin-bottom: 20px
-		max-width: 850px
 		font-weight: 500
+		line-height: 2.1
 	a
 		color: $accent
 		&:hover, &:focus
@@ -448,6 +408,13 @@ html.mm-opening .mm-menu~.mm-slideout
 		//	top: 0px
 	table
 		width: 100%
+		table-layout: fixed
+		&.left-accent
+			th, td
+				&:first-child
+					background: $accent
+					color: #FFFFFF
+					border: solid 1px #d9d9d9
 		tbody
 			min-width: 700px
 		&.compectCount
@@ -463,56 +430,59 @@ html.mm-opening .mm-menu~.mm-slideout
 				background-color: #FFFFFF
 				border: solid 1px #d9d9d9
 		tr
-			&:nth-child(odd)
-				background: #f7f7f7
+			&:first-child
+				background: $accent
+				color: #FFFFFF
+				td, th
+					border: solid 1px #d9d9d9
 			td, th
-				border: solid 1px #d9d9d9
+				border: double 3px #d9d9d9
 				padding-left: 15px
 				padding-right: 15px
 				text-align: center
+				padding-top: 15px
+				padding-bottom: 15px
+				font-size: 14px
 	ul
 		list-style: none
-		margin-top: 20px
+		padding: 0px
+		margin: 0px
+		margin-top: 24px
+		margin-bottom: 20px
 		li
+			padding-left: 23px
+			margin-bottom: 15px
 			position: relative
-			font-weight: 500
-			font-size: 16px
-			margin-bottom: 20px
+			font-size: 14px
 			&:before
 				content: ''
-				display: block
-				width: 10px
-				height: 10px
 				position: absolute
-				left: -25px
-				top: 7px
-				background: $accent
-				border-radius: 50%
-			ul
-				margin-top: 0px
-				li
-					font-size: 12px
-					font-weight: 700
-					&:before
-						content: ''
-						display: block
-						width: 15px
-						height: 1px
-						background: $accent
-						position: absolute
-						left: -25px
-						top: 50%
-						transform: translateY(-50%)
+				left: 5px
+				top: 1px
+				width: 0
+				height: 0
+				border-style: solid
+				border-width: 6px 0 6px 10px
+				border-color: transparent transparent transparent $accent
+			&:last-child
+				margin-bottom: 0px
 	ol
 		list-style-type: none
 		counter-reset:  item
 		padding-left: 0px
 		margin-top: 20px
 		li
-			font-weight: 700
+			margin-bottom: 10px
+			font-size: 14px
 			&:before
-				content: counter(item) ') '
+				content: counter(item) '. '
 				counter-increment: item
+				color: $accent
+				padding-right: 10px
+				font-weight: 900
+	iframe
+		max-width: 100%
+		width: 100%
 
 .bread-c
 	.container
@@ -1279,92 +1249,126 @@ button
 .tab-content-r
 	.tab-trigger-c
 		.tab-trigger-i
-	.price-c
-		display: flex
-		align-items: center
-		justify-content: space-between
-		.sq-btn
-			min-width: 33.9px
-			min-height: 33.7px
-			width: 33.9px
-			height: 33.7px
-			border-radius: 3px
-			background-color: #ffffff
-			border: solid 1px rgba(49, 49, 49, 0.15)
-			display: flex
-			align-items: center
-			justify-content: center
-		.sq-eq
-			&:hover, &.active
-				svg
-					path
-						fill: $accent
-		.sq-like
-			&:hover, &.active
-				svg
-					path
-						fill: $accent2
-	.price-txt
-		font-size: 13px
-		font-weight: 900
-		strong
-			font-size: 21px
+
 
 .tab-content-r
 	margin: 0 0px
 	border: solid 1px rgba(49,49,49,.15)
 	border-top: 0px
 	padding-bottom: 20px
-	.tab-content-c
-		padding: 0 20px
-		margin-top: 15px
+.tab-content-c
+	padding: 0 20px
+	margin-top: 15px
+	&.hit-label
+		position: relative
+		overflow: hidden
 		.tab-content-i
-			border: solid 1px rgba(49, 49, 49, 0.15)
-			padding: 10px
-			padding-top: 15px
-			.title-h
-				display: block
-				text-align: center
-				&:hover
-					.txt
-						border-color: $accent
+			padding-top: 50px
+		&:after
+			content: attr(cont)
+			position: absolute
+			background: $accent2
+			color: #FFFFFF
+			width: 100%
+			text-align: center
+			top: 0px
+			z-index: 2
+			left: 50%
+			transform: translate(-50%, 0)
+			text-transform: uppercase
+			font-size: 11px
+			font-family: $default-font2
+			max-width: 235px
+			height: 13px
+			line-height: 23px
+		&:before
+			content: ''
+			width: 0
+			height: 0
+			top: 13px
+			position: absolute
+			border-style: solid
+			border-width: 15px 117.5px 0 117.5px
+			border-color: $accent2 transparent transparent transparent
+			left: 50%
+			transform: translate(-50%, 0)
+	.tab-content-i
+		border: solid 1px rgba(49, 49, 49, 0.15)
+		padding: 10px
+		padding-top: 15px
+		.title-h
+			display: block
+			text-align: center
+			&:hover
 				.txt
-					font-family: $default-font2
-					font-weight: 700
-					border-bottom: solid 1px $dark
-			.prev-c
-				margin-bottom: 15px
-				margin-top: 15px
-				.prev
-					height: 152px
-					width: 100%
-					background-repeat: no-repeat
-					background-position: center
-		.cheep-c
-			display: flex
-			align-items: center
-			justify-content: center
-			margin-top: 10px
-			p
-				margin-bottom: 0px
-				font-size: 14px
+					border-color: $accent
+			.txt
 				font-family: $default-font2
-				font-weight: 500
-				margin-left: 10px
-				line-height: 28px
-				margin-top: 6px
-		.btn-c
+				font-weight: 700
+				border-bottom: solid 1px $dark
+		.prev-c
+			margin-bottom: 15px
+			margin-top: 15px
+			.prev
+				height: 152px
+				width: 100%
+				background-repeat: no-repeat
+				background-position: center
+		.price-c
 			display: flex
 			align-items: center
 			justify-content: space-between
-			margin-top: 10px
-			.btn-dark
-				min-height: 46px
-				width: 50%
-				&:first-child
-					margin-right: 4px
-				&:last-child
-					margin-left: 4px
+			.sq-btn
+				min-width: 33.9px
+				min-height: 33.7px
+				width: 33.9px
+				height: 33.7px
+				border-radius: 3px
+				background-color: #ffffff
+				border: solid 1px rgba(49, 49, 49, 0.15)
+				display: flex
+				align-items: center
+				justify-content: center
+			.sq-eq
+				&:hover, &.active
+					svg
+						path
+							fill: $accent
+			.sq-like
+				&:hover, &.active
+					svg
+						path
+							fill: $accent2
+		.price-txt
+			font-size: 13px
+			font-weight: 900
+			strong
+				font-size: 21px
+	.cheep-c
+		display: flex
+		align-items: center
+		justify-content: center
+		margin-top: 10px
+		p
+			margin-bottom: 0px
+			font-size: 14px
+			font-family: $default-font2
+			font-weight: 500
+			margin-left: 10px
+			line-height: 28px
+			margin-top: 6px
+	.btn-c
+		display: flex
+		align-items: center
+		justify-content: space-between
+		margin-top: 10px
+		.btn-dark
+			min-height: 46px
+			width: 50%
+			&:first-child
+				margin-right: 4px
+			&:last-child
+				margin-left: 4px
 .tab-content-cc
 	.tab-content-r
 		display: none
@@ -1402,6 +1406,10 @@ button
 		text-align: left
 	p
 		margin-bottom: 0px
+
+.sticky-chrome
+	position: sticky
+	top: 15px
 
 .news-r
 	margin: 0 -7px
