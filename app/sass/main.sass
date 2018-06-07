@@ -546,6 +546,16 @@ html.mm-opening .mm-menu~.mm-slideout
 .pag-cont
 	text-align: left
 	margin-bottom: 50px
+	&.white-pag
+		.pagination
+			justify-content: center
+			li
+				background: #FFFFFF
+				border: solid 1px rgba(0, 0, 0, 0.22)
+				a
+					color: $dark
+					&:hover
+						color: #FFFFFF
 .pagination
 	padding: 0px
 	display: flex
@@ -1295,6 +1305,7 @@ button
 			border-color: $accent2 transparent transparent transparent
 			left: 50%
 			transform: translate(-50%, 0)
+
 	&.short-cart
 		.cheep-c
 			display: none
@@ -1318,6 +1329,32 @@ button
 		border: solid 1px rgba(49, 49, 49, 0.15)
 		padding: 10px
 		padding-top: 15px
+		&.txtShild
+			&:after
+				content: attr(cont)
+				position: absolute
+				top: 10px
+				left: 10px
+				color: #FFFFFF
+				background-image: url("../img/redShild.png")
+				width: 50px
+				height: 50px
+				background-position: center
+				display: flex
+				align-items: center
+				justify-content: center
+				background-repeat: no-repeat
+			&.blueShild
+				&:after
+					font-size: 30px
+					font-weight: 900
+					background-image: url("../img/blueShild.png")
+			&.blackShild
+				&:after
+					font-size: 14px
+					font-weight: 900
+					background-image: url("../img/blackShild.png")
+
 		.title-h
 			display: block
 			text-align: center
@@ -1551,7 +1588,7 @@ button
 	top: 50%
 	transform: translate(0, -50%)
 	right: 20px
-	z-index: 10
+	z-index: 15
 	ul
 		list-style: none
 		margin: 0px

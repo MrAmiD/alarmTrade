@@ -103,6 +103,23 @@
     flex-wrap: wrap
     button
       margin-bottom: 12px
+  .catalog-view
+    margin-top: 30px
+  .tab-content-c.short-cart
+    .tab-content-i
+      background: #FFFFFF
+      z-index: 10
+      left: 0px
+      .cheep-c
+        display: flex
+      .btn-c
+        display: flex
+    &:hover
+      .tab-content-i
+        position: relative
+  .catalog-view .right-v
+    position: relative
+    z-index: 20
 //Small: ≥576px
 +media-breakpoint-down(sm)
   .news-b-i
@@ -139,8 +156,14 @@
     margin-bottom: 10px
   .signals-r .signals-c .cont-c .h2 strong
     font-size: 30px
+  .catalog-view
+    flex-wrap: wrap
 //Extra small: >0
 +media-breakpoint-down(xs)
+  .pag-cont.white-pag .pagination
+    justify-content: flex-start
+  .catalog-view .right-v
+    margin-top: 10px
   .find-b-i
     flex-direction: column
     .prev
