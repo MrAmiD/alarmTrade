@@ -20,8 +20,25 @@
     top: 69px
   .tab-trigger-r .tab-trigger-c .tab-trigger-i button
     padding: 20px 10px
+  .favorite-r .favorite-c .favorite-i .buy-c .btn-accent
+    width: 146px
 //Medium: ≥768px
 +media-breakpoint-down(md)
+  .favorite-r .favorite-c .favorite-i
+    *
+      &:before
+        color: transparent!important
+        pointer-events: none!important
+  .favorite-r .favorite-c .favorite-i .buy-c
+    flex-wrap: wrap
+    height: auto
+    margin-top: 15px
+    .btn-c
+      width: 100%
+      margin-right: 0px
+      button
+        width: 100%
+        margin-top: 15px
   .signals-r .signals-c .signals-i .prev-c:after
     left: unset
     transform: translate(370px, 0)
@@ -194,6 +211,7 @@
     padding: 18px 0px
   .preim-c .h2
     font-size: 20px
+
 /*==========  Mobile First  ==========*/
 
 //Extra small: <576px
