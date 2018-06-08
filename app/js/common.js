@@ -118,10 +118,11 @@ $(document).on('click', '.tab-trigger-r .tab-trigger-c .tab-trigger-i button', f
 
 });
 $(document).on('click', '.garmoshka-r .garmoshka-c .js-triger-g', function () {
-
+ 
     $(this).next('.content-tr').slideToggle();
 
 });
+
 
 function imgIntoFancybox() {
     $('.typepage .content').find('img').each(function(index, element) {
@@ -139,7 +140,7 @@ $(function() {
     var now = new Date();
     var minDate = new Date(new Date().getTime() + 30 * 60 * 1000);//now +30 минут
     var maxDate = new Date();
-    maxDate.setDate(maxDate.getDate()+1);//now + 1 day
+    maxDate.setDate(maxDate.getDate()+30);//now + 30 day
 
     var datetime = $('.datepicker-here').datepicker({
         dateFormat : 'dd.mm.yyyy',
@@ -157,7 +158,7 @@ $(function() {
         $('.js-single-i input[type=checkbox]').not(this).prop('checked', false);
     }); 
     //setInvest start
-    $('input, select').styler({
+    $('input:not(.vue-input), select:not(.vue-select)').styler({
         selectSearch: true,
     });
     //setInvest end

@@ -1,0 +1,55 @@
+{
+  "name": "v-mask",
+  "version": "1.3.0",
+  "description": "Simple input mask lib for vue.js",
+  "main": "dist/v-mask.js",
+  "module": "dist/v-mask.esm.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest",
+    "test-coverage": "cross-env NODE_ENV=test jest --coverage",
+    "build": "npm run bundle && npm run bundle:min",
+    "bundle": "rollup -c build/rollup.conf.js",
+    "bundle:min": "rollup -c build/rollup.conf.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/probil/v-mask.git"
+  },
+  "keywords": [
+    "vue.js",
+    "vue",
+    "vue-mask"
+  ],
+  "author": "Max Lyashuk <m_lyashuk@ukr.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/probil/v-mask/issues"
+  },
+  "homepage": "https://github.com/probil/v-mask#readme",
+  "devDependencies": {
+    "babel-plugin-syntax-dynamic-import": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-register": "^6.0.0",
+    "cross-env": "^5.0.1",
+    "jest": "^20.0.4",
+    "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  },
+  "jest": {
+    "verbose": true,
+    "browser": false,
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/demo/",
+      "/dist/",
+      "/e2e/"
+    ]
+  }
+}
