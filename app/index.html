@@ -306,15 +306,15 @@
 	<div class="container" id="vueCont">
 		<div class="row basket-order-r">
 			<div class="col-12 col-lg-9 basket-order-cl">
-				<div class="basket-order-i">
+				<div v-show="stepType != 'getOrder' " class="basket-order-i">
 					<div class="tab-c">
-						<button class="btn-tr active" @click="changeStepType('contactInfo', $event)">
+						<button class="btn-tr" :class="getActiveStep('contactInfo')" @click="changeStepType('contactInfo', $event)">
 							Контактная информация
 						</button>
-						<button class="btn-tr " @click="changeStepType('deliveryInfo', $event)">
+						<button class="btn-tr " :class="getActiveStep('deliveryInfo')" @click="changeStepType('deliveryInfo', $event)">
 							Способ доставки
 						</button>
-						<button class="btn-tr" @click="changeStepType('paymentInfo', $event)">
+						<button class="btn-tr" :class="getActiveStep('paymentInfo')" @click="changeStepType('paymentInfo', $event)">
 							Оплата
 						</button>
 					</div>
@@ -379,7 +379,6 @@
 								</div>
 							</div>
 						</div>
-						<!--todo: Добавить обработчик кнопок-->
 						<div v-show="stepType == 'deliveryInfo'" class="step-i delivery-step">
 							<div class="row">
 								<div v-show="orderInfo.city.toUpperCase() == 'Пермь'.toUpperCase()" class="col-12 selfDelivery-s selCityDel">
@@ -422,8 +421,7 @@
 												Адрес Самовывоза:
 											</div>
 										 	<p class="selfAddr">
-												г.Пермь, ул. Мира 86
-												офис 497
+												{{orderInfo.addressCompany}}
 											</p>
 										</div>
 										<div class="col-12 col-md-6">
@@ -452,19 +450,28 @@
 											</div>
 											<div class="group-inpt transport-c">
 												<div class="i-group">
-													<input class="vue-input" type="radio" name="transcomp" id="transcomp1">
+													<input class="vue-input" value="Курьерская доставка EMS"
+														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
+														   type="radio" name="transcomp"
+														   checked id="transcomp1">
 													<label for="transcomp1">
 														Курьерская доставка EMS
 													</label>
 												</div>
 												<div class="i-group">
-													<input class="vue-input" type="radio" name="transcomp" id="transcomp2">
+													<input class="vue-input" value="Курьерская доставка СДЭК"
+														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
+														   type="radio" name="transcomp"
+														   checked id="transcomp2">
 													<label for="transcomp2">
 														Курьерская доставка СДЭК
 													</label>
 												</div>
 												<div class="i-group">
-													<input class="vue-input" type="radio" name="transcomp" id="transcomp3">
+													<input class="vue-input" value="Пункт выдачи СДЭК"
+														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
+														   type="radio" name="transcomp"
+														   checked id="transcomp3">
 													<label for="transcomp3">
 														Пункт выдачи СДЭК
 													</label>
@@ -472,12 +479,12 @@
 											</div>
 										</div>
 										<div class="col-12 col-md-6">
-											<div class="h4">
+											<div v-show="orderInfo.transportCompanyInfo.companyName" class="h4">
 												Адрес самовывоза:
 											</div>
-											<div class="group-inpt transport-c">
+											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'}" class="group-inpt transport-c">
 												<div class="my-select vue-select">
-													<select class="vue-select" name="asas" id="asas">
+													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress">
 														<option value="Павла шаманова 5/1">
 															Павла шаманова 5/1
 														</option>
@@ -490,6 +497,39 @@
 													</select>
 												</div>
 											</div>
+
+											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'}" class="group-inpt transport-c">
+												<div class="my-select vue-select">
+													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress2">
+														<option value="Курьерская доставка СДЭК 1">
+															Курьерская доставка СДЭК 1
+														</option>
+														<option value="Курьерская доставка СДЭК 2">
+															Курьерская доставка СДЭК 2
+														</option>
+														<option value="Курьерская доставка СДЭК 3">
+															Курьерская доставка СДЭК 3
+														</option>
+													</select>
+												</div>
+											</div>
+
+											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'}" class="group-inpt transport-c">
+												<div class="my-select vue-select">
+													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress3">
+														<option value="Пункт выдачи СДЭК 1">
+															Пункт выдачи СДЭК 1
+														</option>
+														<option value="Пункт выдачи СДЭК 2">
+															Пункт выдачи СДЭК 2
+														</option>
+														<option value="Пункт выдачи СДЭК 3">
+															Пункт выдачи СДЭК 3
+														</option>
+													</select>
+												</div>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -497,10 +537,10 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="btn-c">
-										<button class="btn-grey">
+										<button class="btn-grey" @click="changeStepType('contactInfo')">
 											Назад
 										</button>
-										<button class="btn-grey">
+										<button class="btn-grey" @click="changeStepType('paymentInfo')">
 											Далее
 										</button>
 									</div>
@@ -508,14 +548,153 @@
 							</div>
 						</div>
 						<div v-show="stepType == 'paymentInfo'" class="step-i payment-step">
-								payment-step
+							<div class="h3">
+								Выберите способ оплаты:
 							</div>
+
+							<div class="row payment-type-r">
+								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
+									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Картой'}"  @click="setPaymentType('Картой')">
+										<div class="payments-c">
+											<div class="pay-i">
+												<div class="bg-visa"></div>
+											</div>
+											<div class="pay-i">
+												<div class="bg-master"></div>
+											</div>
+											<div class="pay-i">
+												<div class="bg-maestro"></div>
+											</div>
+											<div class="pay-i">
+												<div class="bg-trash"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
+									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Яндекс деньги'}" @click="setPaymentType('Яндекс деньги')">
+										<div class="svg-c">
+											<img src="img/yam.png" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
+									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Яндекс в кредит'}" @click="setPaymentType('Яндекс в кредит')">
+										<div class="svg-c">
+											<img src="img/yacred.png" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
+									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Оплата при получении'}" @click="setPaymentType('Оплата при получении')">
+										<div class="svg-c">
+											<img src="img/selfPayment.png" alt="">
+											<p>
+												Оплата при получении
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<div class="btn-c">
+										<button class="btn-grey" @click="changeStepType('deliveryInfo')">
+											Назад
+										</button>
+										<button id="order-btn" data-order="896755" class="btn-grey" @click="changeStepType('getOrder')">
+											Оформить заказ
+										</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div v-show="stepType == 'getOrder'" class="basket-order-i formateOrder">
+					<div class="row">
+						<div class="col-12 col-lg-4">
+							<div class="h3">
+								Контактные данные:
+							</div>
+							<p>
+								<br>
+								Фамилия Имя: {{orderInfo.name}} <br>
+								Телефон: {{orderInfo.phone}} <br>
+								E-mail: {{orderInfo.email}}
+							</p>
+						</div>
+						<div class="col-12 col-lg-4">
+							<div class="h3">
+								Доставка:
+							</div>
+							<p>
+								<br>
+								{{orderInfo.city}} <br>
+								{{orderInfo.deliveryType}}
+								<template v-if="orderInfo.deliveryType == 'Самовывоз'">
+									{{orderInfo.deliveryDate}},
+									ул. {{orderInfo.deliveryAdress.street}},
+									лит. - {{orderInfo.deliveryAdress.lit}},
+									д. {{orderInfo.deliveryAdress.house}},
+									кв. {{orderInfo.deliveryAdress.apartament}}
+								</template>
+
+
+								<template v-if="orderInfo.deliveryType == 'Самовывоз'">
+									{{orderInfo.deliveryDate}},
+									ул. {{orderInfo.deliveryAdress.street}},
+									лит. - {{orderInfo.deliveryAdress.lit}},
+									д. {{orderInfo.deliveryAdress.house}},
+									кв. {{orderInfo.deliveryAdress.apartament}}
+								</template>
+
+								<template v-else>
+									Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
+									Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
+								</template>
+
+								<template v-if="orderInfo.city == 'Пермь' && orderInfo.deliveryType == 'Самовывоз'">
+									 <!--todo: Написать обработчик-->
+									<!--Выводим стандартный адрес-->
+								</template>
+								<template v-if="orderInfo.city == 'Пермь' && orderInfo.deliveryType == 'Доставка курьером'">
+									 <!--todo: Написать обработчик-->
+										<!--Выводим адрес улица, корпус, дом-->
+								</template>
+
+							</p>
+						</div>
+						<div class="col-12 col-lg-4">
+							<div class="h3">
+								Способ оплаты:
+							</div>
+							<p>
+								<br>
+								 {{orderInfo.paymentType}}
+							</p>
+						</div>
+						<div class="col-12 col-lg-4">
+							<button class="btn-grey small-btn" @click="changeStepType('contactInfo')">
+								Редактировать
+							</button>
+							<div class="final-price">
+								<div class="h3">
+									Сумма заказа 5 500 рублей
+								</div>
+								<button class="btn-accent btn-small">
+									Оплатить
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-12 col-lg-3 basket-order-cr">
 				<div class="bascet-list">
-					<div class="city-select">
+					<div class="city-select" v-show="stepType != 'getOrder'">
 						<div class="svg-c">
 							<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -530,11 +709,11 @@
 						</div>
 						<div class="txt-accent">
 							<select name="city-select" class="vue-select" id="city-selectSteps">
-								<option value="Пермь">
-									Пермь
-								</option>
 								<option value="Екатеринбург">
 									Екатеринбург
+								</option>
+								<option value="Пермь">
+									Пермь
 								</option>
 								<option value="Казань">
 									Казань
