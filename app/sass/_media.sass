@@ -214,6 +214,11 @@
     flex-wrap: wrap
 //Extra small: >0
 +media-breakpoint-down(xs)
+  .steps-c .step-i .jq-file__name
+    text-overflow: ellipsis
+    width: 135px
+  .city-select .jq-selectbox .jq-selectbox__dropdown
+    min-width: 209px
   .basket-order-cr
     order: 1
     margin-bottom: 30px
@@ -229,7 +234,11 @@
   .pag-cont.white-pag .pagination
     justify-content: flex-start
   .steps-c .step-i .btn-grey
-    padding: 10px 30px
+    padding: 10px 30px!important
+    display: block!important
+    width: 137px!important
+    font-size: 12px!important
+    text-align: center
   .catalog-view .right-v
     margin-top: 10px
   .find-b-i

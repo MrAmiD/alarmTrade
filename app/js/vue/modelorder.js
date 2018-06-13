@@ -36,7 +36,8 @@ $(function() {
                 commentClient: '',
                 paymentType: 'Картой' // Способ оплаты,
             },
-            stepType: 'contactInfo'
+            stepType: 'contactInfo',
+            deliveryCheckMode: false
         }, 
         computed: {
 
@@ -102,27 +103,48 @@ $(function() {
                     return false;
                 }
             },
+            //Проверка валидности шага "Способ доставки для Перми"
+            getPermDeliveryValid: function () {
+                if(this.orderInfo.city.toUpperCase() == 'Пермь'.toUpperCase()){
+                    if(this.orderInfo.deliveryType.toUpperCase() != 'Самовывоз'.toUpperCase()){
+                        return (this.validTxtInput('#street')
+                        && this.validTxtInput('#lit')
+                        && this.validTxtInput('#house')
+                        && this.validTxtInput('#apartament')
+                        && this.validTxtInput('.delivery-step .datepicker-here'));
+                    }
+                    else {
+                        return this.validTxtInput('.delivery-step .datepicker-here');
+                    }
+                }else {
+                    return true;
+                }
 
-             
+            },
+            getNotPermDeliveryValid: function () {
+                this.deliveryCheckMode = true;
+                if(this.orderInfo.city.toUpperCase() != 'Пермь'.toUpperCase()){
+                    return this.orderInfo.transportCompanyInfo.companyName;
+                }else {
+                    return true;
+                }
+
+            },
             changeStepType: function (value, event) {
 
-                // if(value != 'contactInfo'){
-                //     if(!this.validTxtInput('#clientName')
-                //         || !this.validPhoneInput('#clientPhone')
-                //         || !this.validTxtInput('#clientEmail')){
-                //         return;
-                //     }
-                // }
-                //
-                // if (value != 'deliveryInfo'){
-                //     if((!this.validTxtInput('#street')
-                //         || !this.validTxtInput('#lit')
-                //         || !this.validTxtInput('#house')
-                //         || !this.validTxtInput('#apartament'))
-                //         && (this.orderInfo.deliveryType == 'Доставка курьером')){
-                //         return;
-                //     }
-                // }
+                if(value != 'contactInfo'){
+                    if(!this.validTxtInput('#clientName')
+                        || !this.validPhoneInput('#clientPhone')
+                        || !this.validTxtInput('#clientEmail')){
+                        return;
+                    }
+                }
+
+                if (value != 'deliveryInfo'){
+                    if(!this.getPermDeliveryValid() || !this.getNotPermDeliveryValid()){
+                        return false;
+                    }
+                }
 
                 if(value == 'getOrder'){ // Оформление заказа
                     $('.title-page').text('Ваш заказ № ' + $('#order-btn').data().order )

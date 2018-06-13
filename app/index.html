@@ -445,7 +445,7 @@
 									</div>
 									<div class="row">
 										<div class="col-12 col-md-6">
-											<div class="h4">
+											<div class="h4" :class="{'errorTxt': deliveryCheckMode == true && !orderInfo.transportCompanyInfo.companyName }">
 												Транспортная компания
 											</div>
 											<div class="group-inpt transport-c">
@@ -634,7 +634,7 @@
 								<br>
 								{{orderInfo.city}} <br>
 								{{orderInfo.deliveryType}}
-								<template v-if="orderInfo.deliveryType == 'Самовывоз'">
+								<template v-if="orderInfo.deliveryType == 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
 									{{orderInfo.deliveryDate}},
 									ул. {{orderInfo.deliveryAdress.street}},
 									лит. - {{orderInfo.deliveryAdress.lit}},
@@ -642,27 +642,23 @@
 									кв. {{orderInfo.deliveryAdress.apartament}}
 								</template>
 
-
-								<template v-if="orderInfo.deliveryType == 'Самовывоз'">
-									{{orderInfo.deliveryDate}},
-									ул. {{orderInfo.deliveryAdress.street}},
-									лит. - {{orderInfo.deliveryAdress.lit}},
-									д. {{orderInfo.deliveryAdress.house}},
-									кв. {{orderInfo.deliveryAdress.apartament}}
-								</template>
-
-								<template v-else>
+								<template v-if="orderInfo.deliveryType != 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
 									Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
 									Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
 								</template>
 
-								<template v-if="orderInfo.city == 'Пермь' && orderInfo.deliveryType == 'Самовывоз'">
-									 <!--todo: Написать обработчик-->
-									<!--Выводим стандартный адрес-->
+								<template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType == 'Самовывоз'">
+									<!--todo: Написать обработчик-->
+									Адрес самовывоза: {{orderInfo.addressCompany}} <br>
+
 								</template>
-								<template v-if="orderInfo.city == 'Пермь' && orderInfo.deliveryType == 'Доставка курьером'">
+								<template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType != 'Самовывоз'">
 									 <!--todo: Написать обработчик-->
-										<!--Выводим адрес улица, корпус, дом-->
+									{{orderInfo.deliveryDate}},
+									ул. {{orderInfo.deliveryAdress.street}},
+									лит. - {{orderInfo.deliveryAdress.lit}},
+									д. {{orderInfo.deliveryAdress.house}},
+									кв. {{orderInfo.deliveryAdress.apartament}}
 								</template>
 
 							</p>

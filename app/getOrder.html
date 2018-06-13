@@ -292,6 +292,7 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -301,6 +302,7 @@
             </div>
         </div>
     </div>
+
     <div class="container" id="vueCont">
         <div class="row basket-order-r">
             <div class="col-12 col-lg-9 basket-order-cl">
@@ -419,8 +421,7 @@
                                                 Адрес Самовывоза:
                                             </div>
                                             <p class="selfAddr">
-                                                г.Пермь, ул. Мира 86
-                                                офис 497
+                                                {{orderInfo.addressCompany}}
                                             </p>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -444,7 +445,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-md-6">
-                                            <div class="h4">
+                                            <div class="h4" :class="{'errorTxt': deliveryCheckMode == true && !orderInfo.transportCompanyInfo.companyName }">
                                                 Транспортная компания
                                             </div>
                                             <div class="group-inpt transport-c">
@@ -633,7 +634,7 @@
                                 <br>
                                 {{orderInfo.city}} <br>
                                 {{orderInfo.deliveryType}}
-                                <template v-if="orderInfo.deliveryType == 'Самовывоз'">
+                                <template v-if="orderInfo.deliveryType == 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
                                     {{orderInfo.deliveryDate}},
                                     ул. {{orderInfo.deliveryAdress.street}},
                                     лит. - {{orderInfo.deliveryAdress.lit}},
@@ -641,10 +642,25 @@
                                     кв. {{orderInfo.deliveryAdress.apartament}}
                                 </template>
 
-                                <template v-else>
+                                <template v-if="orderInfo.deliveryType != 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
                                     Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
                                     Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
                                 </template>
+
+                                <template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType == 'Самовывоз'">
+                                    <!--todo: Написать обработчик-->
+                                    Адрес самовывоза: {{orderInfo.addressCompany}} <br>
+
+                                </template>
+                                <template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType != 'Самовывоз'">
+                                    <!--todo: Написать обработчик-->
+                                    {{orderInfo.deliveryDate}},
+                                    ул. {{orderInfo.deliveryAdress.street}},
+                                    лит. - {{orderInfo.deliveryAdress.lit}},
+                                    д. {{orderInfo.deliveryAdress.house}},
+                                    кв. {{orderInfo.deliveryAdress.apartament}}
+                                </template>
+
                             </p>
                         </div>
                         <div class="col-12 col-lg-4">
