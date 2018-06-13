@@ -133,14 +133,27 @@
         display: flex
     &:hover
       .tab-content-i
-        position: relative
+        position: relative!important
+        left: unset
+        right: unset
   .catalog-view .right-v
     position: relative
     z-index: 20
   .basket-order-cr
     margin-top: 75px
+  .fotorama__wrap
+    margin: auto
+  .same-slider .slick-next, .same-slider .slick-prev
+    top: 139px
+  .tab-trigger-r.small-tab .tab-trigger-c .tab-trigger-i button
+    white-space: nowrap
 //Small: ≥576px
 +media-breakpoint-down(sm)
+
+  .same-slider .slick-next, .same-slider .slick-prev
+    top: 151px
+  .fotorama__fullscreen-icon
+    display: none
   .steps-c .step-i .h3
     margin: 15px 0px
   .steps-c .step-i .group-inpt
@@ -212,8 +225,17 @@
     font-size: 30px
   .catalog-view
     flex-wrap: wrap
+  .same-slider .slick-next
+    right: 25px
+  .same-slider .slick-prev
+    left: 25px
+    z-index: 100
+
 //Extra small: >0
 +media-breakpoint-down(xs)
+  .count-trigger .btn-accent
+    margin: 10px 10px
+    margin-left: 0px
   .steps-c .step-i .jq-file__name
     text-overflow: ellipsis
     width: 135px

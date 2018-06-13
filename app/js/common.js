@@ -133,6 +133,60 @@ function imgIntoFancybox() {
     });
 }
 
+function sameSliderInit(){//слайдер на главной странице
+    $('.same-slider').slick({
+        dots: false,
+        infinite: true,
+        //dotsClass: 'slick-dots container d-flex align-items-center justify-content-end',
+        slidesToShow: 4,
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    arrows: true,
+                    dots: false,
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    arrows: true,
+                    dots: false,
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: true,
+                    dots: false,
+                    slidesToShow: 1
+                }
+            }
+        ],
+        prevArrow: '<button type="button" class="slick-prev sliderAboutArrow">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23px" height="45px"><path fill-rule="evenodd" opacity="0.2" fill="rgb(25, 41, 49)" d="M21.579,45.003 C20.887,44.434 20.307,43.754 19.688,43.111 C16.856,40.169 14.018,37.233 11.185,34.293 C7.560,30.530 3.937,26.765 0.314,23.000 C-0.082,22.589 -0.087,22.266 0.303,21.865 C2.924,19.166 5.547,16.472 8.166,13.772 C12.050,9.771 15.931,5.769 19.810,1.763 C20.390,1.165 20.932,0.528 21.579,-0.002 C21.843,-0.002 22.106,-0.002 22.370,-0.002 C23.127,0.555 23.196,1.110 22.545,1.788 C20.771,3.635 18.982,5.469 17.198,7.307 C14.670,9.911 12.141,12.515 9.613,15.119 C7.380,17.419 5.146,19.718 2.913,22.017 C2.518,22.424 2.519,22.422 2.921,22.840 C7.055,27.130 11.188,31.421 15.321,35.712 C17.636,38.116 19.952,40.519 22.267,42.923 C22.359,43.018 22.452,43.111 22.541,43.208 C23.173,43.903 23.121,44.445 22.370,45.003 C22.106,45.003 21.843,45.003 21.579,45.003 Z"/></svg>' +
+        '</button>',
+        nextArrow: '<button type="button" class="slick-next sliderAboutArrow">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="45px"><path fill-rule="evenodd" opacity="0.2" fill="rgb(25, 41, 49)" d="M1.452,-0.003 C2.144,0.566 2.725,1.246 3.343,1.889 C6.175,4.831 9.013,7.766 11.847,10.707 C15.472,14.470 19.095,18.235 22.718,22.000 C23.114,22.411 23.118,22.734 22.728,23.135 C20.108,25.834 17.484,28.528 14.865,31.227 C10.981,35.229 7.100,39.231 3.221,43.236 C2.641,43.835 2.100,44.472 1.452,45.002 C1.188,45.002 0.925,45.002 0.662,45.002 C-0.096,44.445 -0.165,43.890 0.486,43.212 C2.261,41.365 4.049,39.531 5.833,37.693 C8.361,35.089 10.890,32.485 13.419,29.881 C15.652,27.581 17.885,25.282 20.118,22.982 C20.514,22.576 20.512,22.578 20.110,22.160 C15.976,17.870 11.844,13.579 7.710,9.288 C5.395,6.884 3.079,4.481 0.764,2.077 C0.673,1.982 0.579,1.889 0.491,1.792 C-0.142,1.096 -0.090,0.555 0.662,-0.003 C0.925,-0.003 1.188,-0.003 1.452,-0.003 Z"/></svg>' +
+        '</button>'
+    });
+
+
+
+    $(document).on('click', '.slider-trigers .item-t', function () {
+        var slideIndex = $(this).index();
+        console.log('slideIndex = ', slideIndex);
+        // $( '.main-slider' ).slickGoTo( parseInt(slideIndex) );
+
+        var slider = $('.same-slider');
+        slider[0].slick.slickGoTo(parseInt(slideIndex));
+
+    });
+}
+
+
 $(function() {
     /*datepicker start*/
 

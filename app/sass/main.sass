@@ -901,14 +901,58 @@ html.mm-opening .mm-menu~.mm-slideout
 
 
 /*Project start*/
+
+//fotorama custom start
+
+
+.fotorama__thumb-border
+	border-color: $accent
+.fotorama__nav
+	text-align: left
+.fotorama__nav--thumbs .fotorama__nav__frame
+	width: 119px
+	height: 90px
 .fotorama__nav__shaft
-	margin-top: 15px
+	margin-top: 0px
 .fotorama__nav:after, .fotorama__stage:after
 	background-image: none
 	background: none
 .fotorama__nav:before, .fotorama__stage:before
 	background-image: none
 	background: none
+
+.fotorama__arr--next
+	background-image: url("../img/arrNext.png")
+	background-position: center
+.fotorama__arr--prev
+	background-image: url("../img/arrPrev.png")
+	background-position: center
+
+.fotorama__fullscreen-icon
+	background-image: url("../img/zoom.png")
+	background-position: center!important
+	background-color: rgba($dark, 0.8)
+	border-radius: 100%
+	width: 61px
+	height: 61px
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+
+//.fotorama__pointer .fotorama__fullscreen-icon
+//	top: 20px
+//	right: 20px
+
+.sale-good
+	position: relative
+	&:after
+		content: ''
+
+
+.fotorama__thumb
+	border: solid 1px #efefef
+//fotorama custom end
 
 .btn-find
 	background: $dark
@@ -924,6 +968,7 @@ button
 	cursor: pointer
 .menu-m-c
 	display: none
+
 .svg-c
 	display: flex
 	align-items: center
@@ -1219,7 +1264,6 @@ button
 			justify-content: space-between
 			border-bottom: solid 1px rgba(47, 47, 47, 0.19)
 			position: relative
-
 			button
 				background: $accent
 				color: #FFFFFF
@@ -1242,7 +1286,23 @@ button
 					border: solid 1px rgba(47, 47, 47, 0.19)
 					border-bottom: solid 1px #FFFFFF!important
 					border-radius: 3px
-
+	&.small-tab
+		.tab-trigger-c
+			.tab-trigger-i
+				button
+					font-size: 14px
+					font-weight: 700
+					font-family: $default-font
+					color: $accent
+					background: #FFFFFF
+					border: solid 1px rgba(47, 47, 47, 0.19)
+					padding: 10px 30px
+					margin-right: 4px
+					&:last-child
+						margin-right: 0px
+					&.active
+						background: $accent
+						color: #FFFFFF
 .tab-content-r
 	.tab-trigger-c
 		.tab-trigger-i
@@ -1290,7 +1350,7 @@ button
 			left: 50%
 			transform: translate(-50%, 0)
 
-	&.short-cart
+	&.short-cart  
 		.cheep-c
 			display: none
 		.btn-c
@@ -1303,8 +1363,20 @@ button
 				position: absolute
 				background: #FFFFFF
 				z-index: 10
-				left: 0px
+				left: 15px
 				border-color: $dark
+				right: 15px
+			.cheep-c
+				display: flex
+			.btn-c
+				display: flex
+		&.active
+			.tab-content-i
+				position: relative!important
+				background: #FFFFFF
+				z-index: 10
+				left: 15px
+				right: 15px
 			.cheep-c
 				display: flex
 			.btn-c
@@ -1343,32 +1415,9 @@ button
 		border: solid 1px rgba(49, 49, 49, 0.15)
 		padding: 10px
 		padding-top: 15px
-		&.txtShild
-			&:after
-				content: attr(cont)
-				position: absolute
-				top: 10px
-				left: 10px
-				color: #FFFFFF
-				background-image: url("../img/redShild.png")
-				width: 50px
-				height: 50px
-				background-position: center
-				display: flex
-				align-items: center
-				justify-content: center
-				background-repeat: no-repeat
-			&.blueShild
-				&:after
-					font-size: 30px
-					font-weight: 900
-					background-image: url("../img/blueShild.png")
-			&.blackShild
-				&:after
-					font-size: 14px
-					font-weight: 900
-					background-image: url("../img/blackShild.png")
-
+		&.tab-content-standart
+			border: none
+			padding: 0px
 		.title-h
 			display: block
 			text-align: center
@@ -1421,7 +1470,140 @@ button
 				margin-right: 4px
 			&:last-child
 				margin-left: 4px
+.cheep-c
+	display: flex
+	align-items: center
+	justify-content: center
+	margin-top: 10px
+	p
+		margin-bottom: 0px
+		font-size: 14px
+		font-family: $default-font2
+		font-weight: 500
+		margin-left: 10px
+		line-height: 28px
+		margin-top: 6px
+.jq-number
+	padding: 0px
+	.jq-number__field
+		border: solid 1px rgba(0, 0, 0, 0.08)
+		box-shadow: none
+	input
+		font-size: 15px
+		font-weight: 900
+		font-family: $default-font2
+//jq-number custom start
+.jq-number__spin
+	background: transparent
+	border: none
+	box-shadow: none
+	&:hover
+		background: transparent
+		border: none
+		box-shadow: none
+	&:after
+		border: none!important
+	&.minus
+		bottom: 3px
+		&:after
+			background-image: url("../img/arrowDownInput.png")
+			background-position: center
+			width: 32px
+			height: 14px
+			top: 0px
+			left: 0px
+			background-repeat: no-repeat
+	&.plus
+		&:after
+			background-image: url("../img/arrowUpInput.png")
+			background-position: center
+			width: 32px
+			height: 14px
+			top: 3px
+			left: 0px
+			background-repeat: no-repeat
+//jq-number custom end
 
+.count-trigger
+	display: flex
+	align-items: center
+	flex-wrap: wrap
+	margin-top: 24px
+	border-bottom: solid 1px #c6c6c6
+	padding-bottom: 20px
+	margin-bottom: 30px
+	p
+		margin-bottom: 0px
+		font-weight: 700
+		font-size: 15px
+		margin-right: 17px
+	.btn-accent
+		margin-top: 0px
+		margin-left: 17px
+		width: 162px
+		text-align: center
+		margin-right: 17px
+	.fav-btn
+		display: flex
+		align-items: center
+		width: 83px
+		justify-content: space-between
+
+.delivery-txt-i
+	display: flex
+	align-items: center
+	margin-bottom: 15px
+	p
+		margin-bottom: 0px
+		line-height: 1.2
+		font-size: 12px
+		margin-left: 9px
+
+.disables-cb
+	pointer-events: none
+	margin-top: 25px
+	label
+		font-weight: 700
+		font-family: $default-font2
+	&.notHaveScope
+		.txt-accent
+			color: $accent2
+		.jq-checkbox.checked
+			background: $accent2
+.txtShild
+	&:after
+		content: attr(cont)
+		position: absolute
+		top: 10px
+		left: 10px
+		color: #FFFFFF
+		background-image: url("../img/redShild.png")
+		width: 50px
+		height: 50px
+		background-position: center
+		display: flex
+		align-items: center
+		justify-content: center
+		background-repeat: no-repeat
+		background-size: contain
+	&.blueShild
+		&:after
+			font-size: 30px
+			font-weight: 900
+			background-image: url("../img/blueShild.png")
+	&.blackShild
+		&:after
+			font-size: 14px
+			font-weight: 900
+			background-image: url("../img/blackShild.png")
+	&.bigShild
+		&:after
+			top: 20px
+			left: 35px
+			width: 65px
+			height: 65px
+			background-size: contain
+			font-size: 19px
 .sq-btn
 	min-width: 33.9px
 	min-height: 33.7px
@@ -1448,6 +1630,26 @@ button
 			svg
 				path
 					fill: $accent2
+.prices-c
+	display: flex
+	flex-wrap: wrap
+	.oldPrice
+		padding-right: 32px
+
+.oldPrice
+	color: rgba(23, 23, 23, 0.4)
+	font-size: 23px
+	font-family: $default-font2
+	font-weight: 700
+	text-decoration: line-through
+	margin-bottom: 5px
+
+.currPrice
+	color: $accent
+	font-weight: 900
+	font-size: 23px
+	font-family: $default-font2
+	margin-bottom: 5px
 
 .tab-content-cc
 	.tab-content-r
@@ -2463,6 +2665,24 @@ input
 				flex-direction: column
 				p
 					margin-bottom: 0px
+
+.ya-share2__badge
+	border-radius: 100px
+
+.same-prod
+	.h2
+		margin-top: 30px
+		margin-bottom: 0px
+.same-slider
+	height: 362px
+	.slick-next:before, .slick-prev:before
+		display: none
+	.slick-next, .slick-prev
+		transform: none
+		top: 105px
+	.same-i
+		position: relative
+		height: 380px
 /*Project end*/
 
 

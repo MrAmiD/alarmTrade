@@ -31,7 +31,7 @@ $(function() {
                     address: '', // адрес самовывоза
                     companyName: '' // Название транспортной компании
                 },
-                addressCompany: 'г.Пермь, ул. Мира 86 офис 497',
+                addressCompany: 'с 10.00 до 19.00. Адрес: г. Екатеринбург, ул. Предельная, 57, литер Ч.',
                 deliveryDate: '',
                 commentClient: '',
                 paymentType: 'Картой' // Способ оплаты,
