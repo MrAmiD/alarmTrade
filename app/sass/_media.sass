@@ -149,6 +149,8 @@
     white-space: nowrap
   .seo-c .content
     padding: 0px
+  .favorite-r .favorite-c:first-child .favorite-i .itogo
+    padding-right: 0px
 //Small: ≥576px
 +media-breakpoint-down(sm)
 
@@ -235,9 +237,28 @@
 
 //Extra small: >0
 +media-breakpoint-down(xs)
+  .favorite-r .favorite-c.basket-c .favorite-i :before
+    color: $dark!important
+    pointer-events: none!important
+  .favorite-r .favorite-c.basket-c .favorite-i .buy-c
+    margin-top: 50px
+    &>div
+      margin-bottom: 40px
+      padding-right: 10px
+  .favorite-r .favorite-c.basket-c .favorite-i .good-link:before
+    display: none
+  .favorite-r .favorite-c.basket-c .favorite-i .price:before
+    top: -27px
+    display: block
+  .favorite-r .favorite-c.basket-c .favorite-i .count:before
+    top: -18px
+    display: block
   .count-trigger .btn-accent
     margin: 10px 10px
-    margin-left: 0px
+    margin-left: 0px 
+  .favorite-r .favorite-c.basket-c .favorite-i .itogo:before
+    top: -12px
+    display: block
   .steps-c .step-i .jq-file__name
     text-overflow: ellipsis
     width: 135px
