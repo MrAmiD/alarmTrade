@@ -186,10 +186,48 @@ function sameSliderInit(){//слайдер на главной странице
     });
 }
 
+function setEqFieldHeight() { //Установка высоты для строк в блоке сравненеие
+    var fieldArr = $('.equaiments .txt-field-c .txt-field'),
+        txtArr = $('.equaiments .discr p'),
+        maxHeight = 0;
+
+    for(var i = 0; i < txtArr.length; i++){
+        var tmpFieldsArr = $('.equaiments .txt-field-c .txt-field:nth-child('+String(i+1)+')');
+        maxHeight = $('.equaiments .discr p').eq(i).height();
+
+        console.log('maxHeightTitle = ', maxHeight);
+
+        tmpFieldsArr.each(function (index, value) {
+            console.log('value = ', $(this).height());
+            if(maxHeight < $(this).height()){
+                maxHeight = $(this).height();
+            }
+        });
+        maxHeight += 20;
+        tmpFieldsArr.height(maxHeight + 'px');
+        $('.equaiments .discr p').eq(i).height(maxHeight + 'px');
+    }
+
+}
+
+
 
 $(function() {
-    /*datepicker start*/
+    setEqFieldHeight();
+    $('.equaiments-cont').mCustomScrollbar({
+        theme: "dark",
+        axis:"x",
+        callbacks:{
+            onInit: function(){
+                setEqFieldHeight();
+            }
+        },
+        scrollInertia: 1,
+        documentTouchScroll: true,
+        mouseWheel: false
+    });
 
+    /*datepicker start*/
     //Календарь для выбора даты
     var now = new Date();
     var minDate = new Date(new Date().getTime() + 30 * 60 * 1000);//now +30 минут
