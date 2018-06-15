@@ -190,42 +190,87 @@ function setEqFieldHeight() { //Установка высоты для стро�
     var fieldArr = $('.equaiments .txt-field-c .txt-field'),
         txtArr = $('.equaiments .discr p'),
         maxHeight = 0;
+    
+    if($(window).width() < 768){
+        console.log('win < 768');
+        for(var i = 0; i < txtArr.length; i++){
+            var tmpFieldsArr = $('.equaiments .txt-field-c .txt-field:nth-child('+String(i+1)+')');
+            maxHeight = 0;
+            //вычисляем высоту шапки
+            var thHeight = $('.equaiments .discr p').eq(i).height() + 20;
 
-    for(var i = 0; i < txtArr.length; i++){
-        var tmpFieldsArr = $('.equaiments .txt-field-c .txt-field:nth-child('+String(i+1)+')');
-        maxHeight = $('.equaiments .discr p').eq(i).height();
+            //вычисляем максимальную высоту контентной части
 
-        console.log('maxHeightTitle = ', maxHeight);
+            tmpFieldsArr.each(function (index, value) {
+                if(maxHeight < ($(this).height())){
+                    maxHeight = $(this).height();
+                }
+            });
 
-        tmpFieldsArr.each(function (index, value) {
-            console.log('value = ', $(this).height());
-            if(maxHeight < $(this).height()){
-                maxHeight = $(this).height();
-            }
-        });
-        maxHeight += 20;
-        tmpFieldsArr.height(maxHeight + 'px');
-        $('.equaiments .discr p').eq(i).height(maxHeight + 'px');
+            console.log('thHeight = ', thHeight);
+            tmpFieldsArr.height(maxHeight + thHeight + 'px');
+            tmpFieldsArr.css('padding-top', String(thHeight-10) + 'px');
+            $('.equaiments .discr p').eq(i).height(maxHeight + thHeight + 'px');
+        }
+    } else {
+        console.log('win > 768');
+        for(var i = 0; i < txtArr.length; i++){
+            var tmpFieldsArr = $('.equaiments .txt-field-c .txt-field:nth-child('+String(i+1)+')');
+            maxHeight = $('.equaiments .discr p').eq(i).height();
+
+            tmpFieldsArr.each(function (index, value) {
+                if(maxHeight < $(this).height()){
+                    maxHeight = $(this).height();
+                }
+            });
+            maxHeight += 30;
+            tmpFieldsArr.height(maxHeight + 'px');
+            $('.equaiments .discr p').eq(i).height(maxHeight + 'px');
+        }
     }
+    
+
 
 }
 
 
+ var calcEqualDevices = false;//Расчитывалась ли высота для мобильных устройств
+//
+// $(window).resize(function () {
+//     if(calcEqualDevices = false){
+//
+//     }
+// });
+
 
 $(function() {
-    setEqFieldHeight();
-    $('.equaiments-cont').mCustomScrollbar({
-        theme: "dark",
-        axis:"x",
-        callbacks:{
-            onInit: function(){
-                setEqFieldHeight();
-            }
-        },
-        scrollInertia: 1,
-        documentTouchScroll: true,
-        mouseWheel: false
-    });
+
+    //todo: Добавить имена товаров в мобильных устройствах
+    if($(window).width() < 768){
+        setEqFieldHeight();
+        // calcEqualDevices = true;
+    } else {
+        $('.equaiments-cont').mCustomScrollbar({
+            theme: "dark",
+            axis:"x",
+            callbacks:{
+                onInit: function(){
+                    if(!calcEqualDevices){
+                        setTimeout(function() { setEqFieldHeight(); }, 1000);
+                    }
+                    calcEqualDevices = true;
+                }
+            },
+            scrollInertia: 1,
+            documentTouchScroll: false,
+            contentTouchScroll: true,
+            mouseWheel: false
+        });
+    }
+
+
+
+
 
     /*datepicker start*/
     //Календарь для выбора даты

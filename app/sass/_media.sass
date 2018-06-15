@@ -236,8 +236,37 @@
     z-index: 100
   .cont-txt-ico
     padding-left: 0px
+  .equaiments .btn-c
+    visibility: hidden
+  .equaiments .h3
+    visibility: hidden
+  .equaiments
+    .good-column
+      border: none
+      .cart-prod-eq
+        border-bottom: none
+    .txt-field
+      align-items: flex-start
+      .svg-c
+        align-items: flex-end
+        position: relative
+        top: 8px
+  .equaiments.equaiments-discr
+    position: absolute
+    left: 34px
+    margin-top: 4px
+    .discr
+      p
+        font-family: $default-font
+        font-weight: 700
+        align-items: flex-start
+        pointer-events: none
+  .equaiments .discr p
+    align-items: flex-end
 //Extra small: >0
 +media-breakpoint-down(xs)
+  #consult.white-popup, .popup.white-popup
+    margin: 0 10px
   .map-cont
     padding: 0 30px
   .favorite-r .favorite-c.basket-c .favorite-i :before

@@ -646,19 +646,35 @@ html.mm-opening .mm-menu~.mm-slideout
 	background: $accent2
 	&.white-popup
 		background: #fff
+		padding: 44px 10px
 		.h3, .h4, p, a, label
 			color: $dark
 		input
 			border-radius: 0px
-			border: solid 2px $accent
+			border: solid 1px rgba(47, 47, 47, 0.29)
 		textarea
-			border: solid 2px $accent
+			border: solid 1px rgba(47, 47, 47, 0.29)
+			color: $dark
+			&::-webkit-input-placeholder
+				color: $accent2!important
+			&:-moz-placeholder
+				color: $accent2!important
+			&::-moz-placeholder
+				color: $accent2!important
+		.btn-accent
+			width: 100%
+			text-align: center
+			border-radius: 0px
 		.fancybox-close-small
 			&:after
-				color: $dark
+				color: $accent
+				font-size: 30px
+				font-weight: 500
+				font-family: $default-font
 			&:hover, &:focus
 				&:after
-					color: lighten($dark, 20)
+					color: lighten($accent, 20)
+
 	.h1
 		margin-bottom: 15px
 	.h3
@@ -675,9 +691,11 @@ html.mm-opening .mm-menu~.mm-slideout
 			width: 100%
 	.h4
 		color: #FFFFFF
-		font-size: 25px
+		font-size: 22px
 		font-weight: 900
-		margin-bottom: 20px
+		margin-bottom: 34px
+		text-align: center
+		line-height: 1
 	p
 		color: #FFFFFF
 		margin-top: 20px
@@ -714,11 +732,11 @@ html.mm-opening .mm-menu~.mm-slideout
 		padding-top: 10px
 		resize: none
 		&::-webkit-input-placeholder
-			color: $dark
+			color: $dark!important
 		&:-moz-placeholder
-			color: $dark
+			color: $dark!important
 		&::-moz-placeholder
-			color: $dark
+			color: $dark!important
 	.client-msg
 		display: none
 	.fancybox-close-small
@@ -2947,6 +2965,8 @@ input
 	margin-bottom: 15px
 #eq-fb
 	padding: 0px
+	max-width: 100vw
+	padding-bottom: 15px
 	.fancybox-close-small:after
 		background: transparent
 		font-size: 37px
