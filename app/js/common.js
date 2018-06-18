@@ -244,12 +244,24 @@ function setEqFieldHeight() { //Установка высоты для стро�
 
 
 $(function() {
-
     //todo: Добавить имена товаров в мобильных устройствах
+
+
+
     if($(window).width() < 768){
-        setEqFieldHeight();
+        $("#eq-fb").fancybox({
+            onStart     :   function() {
+                // return window.confirm('Continue?');
+            },
+            afterShow  :   function() {
+                setEqFieldHeight();
+                console.log('#eq-fb onComplete');
+            }
+        });
+
         // calcEqualDevices = true;
     } else {
+
         $('.equaiments-cont').mCustomScrollbar({
             theme: "dark",
             axis:"x",
@@ -259,6 +271,7 @@ $(function() {
                         setTimeout(function() { setEqFieldHeight(); }, 1000);
                     }
                     calcEqualDevices = true;
+                    setEqFieldHeight();
                 }
             },
             scrollInertia: 1,
