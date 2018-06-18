@@ -37,7 +37,8 @@ $(function() {
                 paymentType: 'Картой' // Способ оплаты,
             },
             stepType: 'contactInfo',
-            deliveryCheckMode: false
+            deliveryCheckMode: false,
+            selDelCity: 'Екатеринбург'.toUpperCase() //город из которого есть самовывоз
         }, 
         computed: {
 

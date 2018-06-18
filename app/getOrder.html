@@ -381,7 +381,7 @@
                         </div>
                         <div v-show="stepType == 'deliveryInfo'" class="step-i delivery-step">
                             <div class="row">
-                                <div v-show="orderInfo.city.toUpperCase() == 'Пермь'.toUpperCase()" class="col-12 selfDelivery-s selCityDel">
+                                <div v-show="orderInfo.city.toUpperCase() == selDelCity.toUpperCase()" class="col-12 selfDelivery-s selCityDel">
                                     <div class="row">
                                         <div class="col-12 col-md-6">
                                             <div class="h3">
@@ -439,7 +439,7 @@
                                     </div>
                                 </div>
                                 <!--Для Всех городов, кроме Перми, доставка транспортной компанией-->
-                                <div v-show="orderInfo.city.toUpperCase() != 'Пермь'.toUpperCase()" class="col-12 transDelivery-s selCityDel">
+                                <div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12 transDelivery-s selCityDel">
                                     <div class="h3">
                                         Выберите способ доставки:
                                     </div>
@@ -634,7 +634,7 @@
                                 <br>
                                 {{orderInfo.city}} <br>
                                 {{orderInfo.deliveryType}}
-                                <template v-if="orderInfo.deliveryType == 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
+                                <template v-if="orderInfo.deliveryType == 'Самовывоз' && orderInfo.city != selDelCity">
                                     {{orderInfo.deliveryDate}},
                                     ул. {{orderInfo.deliveryAdress.street}},
                                     лит. - {{orderInfo.deliveryAdress.lit}},
@@ -642,18 +642,15 @@
                                     кв. {{orderInfo.deliveryAdress.apartament}}
                                 </template>
 
-                                <template v-if="orderInfo.deliveryType != 'Самовывоз' && orderInfo.city != 'ПЕРМЬ'">
+                                <template v-if="orderInfo.deliveryType != 'Самовывоз' && orderInfo.city != selDelCity">
                                     Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
                                     Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
                                 </template>
 
-                                <template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType == 'Самовывоз'">
-                                    <!--todo: Написать обработчик-->
+                                <template v-if="orderInfo.city == selDelCity && orderInfo.deliveryType == 'Самовывоз'">
                                     Адрес самовывоза: {{orderInfo.addressCompany}} <br>
-
                                 </template>
-                                <template v-if="orderInfo.city == 'ПЕРМЬ' && orderInfo.deliveryType != 'Самовывоз'">
-                                    <!--todo: Написать обработчик-->
+                                <template v-if="orderInfo.city == selDelCity && orderInfo.deliveryType != 'Самовывоз'">
                                     {{orderInfo.deliveryDate}},
                                     ул. {{orderInfo.deliveryAdress.street}},
                                     лит. - {{orderInfo.deliveryAdress.lit}},
@@ -940,7 +937,6 @@
 
 <script src="js/vue/vue.js"></script>
 <script src="js/vue/modelorder.js"></script>
-
 
 <!--For mask input START-->
 <script src="js/vue/v-mask-master/dist/v-mask.min.js"></script>
