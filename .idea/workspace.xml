@@ -1,51 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d4d3dbb-f277-4185-8481-0ccfe0eb9775" name="Default" comment="Доделал блок сравнения и все всплывашки. Если ещё будет время допилить мобильную версию всплывашки &quot;сравнение&quot; todo в common.js">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/arrNext.png" afterPath="$PROJECT_DIR$/app/img/arrNext.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/arrPrev.png" afterPath="$PROJECT_DIR$/app/img/arrPrev.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/blackShild.png" afterPath="$PROJECT_DIR$/app/img/blackShild.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/blueShild.png" afterPath="$PROJECT_DIR$/app/img/blueShild.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/box.png" afterPath="$PROJECT_DIR$/app/img/box.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/calendar-ico.png" afterPath="$PROJECT_DIR$/app/img/calendar-ico.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/cat1.png" afterPath="$PROJECT_DIR$/app/img/cat1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/contimg.png" afterPath="$PROJECT_DIR$/app/img/contimg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/logo.png" afterPath="$PROJECT_DIR$/app/img/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/news.png" afterPath="$PROJECT_DIR$/app/img/news.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/pandora.png" afterPath="$PROJECT_DIR$/app/img/pandora.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/payment_sprites.png" afterPath="$PROJECT_DIR$/app/img/payment_sprites.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/redShild.png" afterPath="$PROJECT_DIR$/app/img/redShild.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr1.png" afterPath="$PROJECT_DIR$/app/img/rubr1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr11.png" afterPath="$PROJECT_DIR$/app/img/rubr11.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr12.png" afterPath="$PROJECT_DIR$/app/img/rubr12.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr2.png" afterPath="$PROJECT_DIR$/app/img/rubr2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr3.png" afterPath="$PROJECT_DIR$/app/img/rubr3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr4.png" afterPath="$PROJECT_DIR$/app/img/rubr4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr5.png" afterPath="$PROJECT_DIR$/app/img/rubr5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr6.png" afterPath="$PROJECT_DIR$/app/img/rubr6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr7.png" afterPath="$PROJECT_DIR$/app/img/rubr7.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr8.png" afterPath="$PROJECT_DIR$/app/img/rubr8.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/rubr9.png" afterPath="$PROJECT_DIR$/app/img/rubr9.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/selfPayment.png" afterPath="$PROJECT_DIR$/app/img/selfPayment.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/signal1.png" afterPath="$PROJECT_DIR$/app/img/signal1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/signal2.png" afterPath="$PROJECT_DIR$/app/img/signal2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/signal3.png" afterPath="$PROJECT_DIR$/app/img/signal3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/slider.jpg" afterPath="$PROJECT_DIR$/app/img/slider.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/slider.png" afterPath="$PROJECT_DIR$/app/img/slider.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/slider2.jpg" afterPath="$PROJECT_DIR$/app/img/slider2.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/slider3.jpg" afterPath="$PROJECT_DIR$/app/img/slider3.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/v1.png" afterPath="$PROJECT_DIR$/app/img/v1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/yacred.png" afterPath="$PROJECT_DIR$/app/img/yacred.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/yam.png" afterPath="$PROJECT_DIR$/app/img/yam.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/yandexMoney.jpg" afterPath="$PROJECT_DIR$/app/img/yandexMoney.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/zoom.png" afterPath="$PROJECT_DIR$/app/img/zoom.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/Слой 5.png" afterPath="$PROJECT_DIR$/app/img/Слой 5.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/Слой 6.png" afterPath="$PROJECT_DIR$/app/img/Слой 6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/Слой 7.png" afterPath="$PROJECT_DIR$/app/img/Слой 7.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/img/Слой 8.png" afterPath="$PROJECT_DIR$/app/img/Слой 8.png" />
+    <list default="true" id="1d4d3dbb-f277-4185-8481-0ccfe0eb9775" name="Default" comment="Обновил описание">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/basket.html" afterPath="$PROJECT_DIR$/app/basket.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/getOrder.html" afterPath="$PROJECT_DIR$/app/getOrder.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/vue/modelorder.js" afterPath="$PROJECT_DIR$/app/js/vue/modelorder.js" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -396,8 +353,8 @@
           <file leaf-file-name="getOrder.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/getOrder.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="275">
-                  <caret line="655" column="76" selection-start-line="655" selection-start-column="76" selection-end-line="655" selection-end-column="76" />
+                <state relative-caret-position="209">
+                  <caret line="652" column="76" selection-start-line="652" selection-start-column="66" selection-end-line="652" selection-end-column="76" />
                   <folding>
                     <marker date="1529306704178" expanded="true" signature="1363:1446" ph="..." />
                     <marker date="1529306704178" expanded="true" signature="1375:1434" ph="{...}" />
@@ -580,8 +537,8 @@
           <file leaf-file-name="modelorder.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/js/vue/modelorder.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="599">
-                  <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
+                <state relative-caret-position="88">
+                  <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
                   <folding />
                 </state>
               </provider>
@@ -904,7 +861,7 @@
       <workItem from="1529040043506" duration="18093000" />
       <workItem from="1529229817393" duration="616000" />
       <workItem from="1529291397557" duration="53000" />
-      <workItem from="1529297186720" duration="10193000" />
+      <workItem from="1529297186720" duration="10385000" />
     </task>
     <task id="LOCAL-00001" summary="layouts typeless">
       <created>1507611710743</created>
@@ -1130,11 +1087,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529305448314</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Ужал картинки, обновил model для Vue">
+      <created>1529307437549</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1529307437549</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="550055000" />
+    <option name="totallyTimeSpent" value="550247000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -1185,7 +1149,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="BootstrapV4 scss" />
     <MESSAGE value="update libs and bootstrap grid as scss" />
     <MESSAGE value="bootstrap vars and media" />
     <MESSAGE value="mobile menu bagfix" />
@@ -1210,7 +1173,8 @@
     <MESSAGE value="Блок &quot;сравнения&quot;, доделать версию для мобильных устройст, и 3 всплывашки" />
     <MESSAGE value="Блок &quot;сравнения&quot;, доделал версию для мобильных устройст, Из всплывашек осталась только корзина. Также надо разобраться с вызовом функции расчёта высоты строк." />
     <MESSAGE value="Доделал блок сравнения и все всплывашки. Если ещё будет время допилить мобильную версию всплывашки &quot;сравнение&quot; todo в common.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал блок сравнения и все всплывашки. Если ещё будет время допилить мобильную версию всплывашки &quot;сравнение&quot; todo в common.js" />
+    <MESSAGE value="Ужал картинки, обновил model для Vue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ужал картинки, обновил model для Vue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3016,22 +2980,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/vue/modelorder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/getOrder.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="655" column="76" selection-start-line="655" selection-start-column="76" selection-end-line="655" selection-end-column="76" />
+        <state relative-caret-position="209">
+          <caret line="652" column="76" selection-start-line="652" selection-start-column="66" selection-end-line="652" selection-end-column="76" />
           <folding>
             <marker date="1529306704178" expanded="true" signature="1363:1446" ph="..." />
             <marker date="1529306704178" expanded="true" signature="1375:1434" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/vue/modelorder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

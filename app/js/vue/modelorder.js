@@ -4,7 +4,7 @@
 
 /*
 * Для бэкенда
-* 1) Если orderInfo.city != 'Пермь', то доставка транспортной компанией orderInfo.transportCompanyInfo
+* 1) Если orderInfo.city != selDelCity, то доставка транспортной компанией orderInfo.transportCompanyInfo
 * 2) У #order-btn в параметре data-order находится номер заказа.
 * 3)
 * */
@@ -38,7 +38,7 @@ $(function() {
             },
             stepType: 'contactInfo',
             deliveryCheckMode: false,
-            selDelCity: 'Екатеринбург'.toUpperCase() //город из которого есть самовывоз
+            selDelCity: 'Екатеринбург'.toUpperCase() //город с которым идёт сравнение для вывода блока самовывоза, в шаблоне
         }, 
         computed: {
 
