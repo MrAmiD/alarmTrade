@@ -1898,6 +1898,11 @@ button
 #my-content
 	min-height: 70vh
 .city-select
+	.txt-accent
+		a
+			font-weight:  700
+			text-decoration: underline
+			color: $accent
 	.jq-selectbox
 		max-width: 100%
 		width: 100%
@@ -1942,7 +1947,8 @@ button
 			min-width: 100px
 		li
 			white-space: inherit
-
+.easy-autocomplete
+	width: 276px!important
 .title-page
 	text-align: center
 	margin: 50px 0px
@@ -3266,6 +3272,95 @@ input
 		min-height: 29px
 		margin-top: 0px
 		border-radius: 0px
+
+.city-popup
+	.group-i
+		position: relative
+		width: 276px
+		input
+			border: solid 1px #e1e1e1
+			width: 100%
+			padding-right: 45px
+		button
+			border: none
+			background: transparent
+			position: absolute
+			top: 50%
+			right: 12px
+			transform: translate(0, -50%)
+
+.h-city
+	margin-top: 18px
+	display: flex
+	align-items: center
+.tabs-city
+	display: flex
+	align-items: center
+	margin-left: 63px
+	.tab-i
+		border-bottom: solid 3px #dddddd
+		padding: 0 18px
+		font-size: 12px
+		line-height: 1.5
+		cursor: pointer
+		height: 25px
+		&.active
+			border-color: $accent
+.city-tab-i
+	margin-top: 30px
+	display: none
+	animation: fadeEffect .3s ease
+	&.active
+		display: flex
+.char-cc
+	display: flex
+	flex-wrap: wrap
+	.char-c
+		width: 25%
+		min-width: 25%
+.js-scroll-city
+	overflow: auto
+	max-height: 400px
+
+.city-list
+	ul
+		margin: 0px
+		padding: 0px
+		list-style: none
+		li
+			margin-bottom: 10px
+			cursor: pointer
+			&:hover
+				color: $accent
+			&.active
+				color: $accent
+			&.last-child
+				margin-right: 0px
+
+.char-c
+	margin-bottom: 30px
+	.single-char
+		font-size: 16px
+		font-weight: 900
+		text-transform: uppercase
+		margin-bottom: 15px
+		line-height: 1.5
+	b
+		font-weight: 900
+
+#citySelect
+	.mCS-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+		height: 100%
+	.fancybox-close-small
+		&:after
+			color: $dark
+			font-size: 30px
+			font-weight: 500
+			font-family: $default-font
+		&:hover, &:focus
+			&:after
+				color: lighten($dark, 20)
+				background: transparent
 /*Project end*/
 
 

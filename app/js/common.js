@@ -184,6 +184,7 @@ function sameSliderInit(){//слайдер на главной странице
         slider[0].slick.slickGoTo(parseInt(slideIndex));
 
     });
+
 }
 
 function setEqFieldHeight() { //Установка высоты для строк в блоке сравненеие
@@ -242,10 +243,129 @@ function setEqFieldHeight() { //Установка высоты для стро�
 //     }
 // });
 
+function clearFindCityInput(){
+    $('.js-selectcity').val('');
+}
+
+$(document).on('click', '.tabs-city .tab-i', function () {
+    $('.tabs-city .tab-i').removeClass('active');
+    $(this).addClass('active');
+
+    $('.city-tab-i').removeClass('active');
+    $('.city-tab-i').eq($(this).index()).addClass('active');
+
+});
+
+
+/*City Start*/
+
+$(document).on('click', '.city-list ul li', function () {
+    setCity($(this).text());
+
+    $('.city-list ul li').removeClass('active');
+    $(this).addClass('active');
+
+});
+
+function cityListInit(){///Заполняет всплывашку  со списком городов
+    var cityList = $('.city-tab-i.js-char-bb .char-cc .char-c'),
+        cityArr = [];
+    cityList.each(function(val){
+        var cityListArr = $(this).data().citylist.split(','),
+            charCont = $(this);
+        cityArr = cityArr.concat(cityListArr);
+        charCont.find('.city-list ul').html('');//чистим города
+        cityListArr.forEach(function (singleCity) {
+            var htmlLi = "<li>"+ singleCity +"</li>";///Одна строка города
+            charCont.find('.city-list ul').append(htmlLi);///Добавляем город в блок с соответствующей буквой
+        });
+    });
+
+    var uniqueCity = cityArr.filter(onlyUnique);
+
+    console.log('cityArr = ', uniqueCity);
+    return uniqueCity;
+}
+function filterCity(event) {
+    var inputVal = event.target.value,
+        selector = '.js-selectcity';
+
+    if(event.keyCode === 13){ //enter
+         // $(selector).val($('.easy-autocomplete-container ul li:first-child').text());
+        // $(selector).parent().find('.easy-autocomplete-container').find('li').first().find('.eac-item').trigger('click');
+
+        // var e = jQuery.Event("keyup", { keyCode: 65, which: 65});
+        // $(selector).focus();
+        // $(selector).attr('value', '');
+        // $(selector).triggerHandler(e);
+        // $(selector).trigger('change');
+        //
+        // $(selector).triggerHandler(e);
+        // $(selector).triggerHandler("click");
+        // $(selector).trigger('click');
+
+    }
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+function setCity(cityVal){
+    console.log('Город выбран', cityVal);
+
+    //Какой-нибудь запрос на сервер для установки нового города
+
+    $('.js-setCity').text(cityVal);
+
+    $.fancybox.close();
+
+}
+
+function getOption(selector, dataVal){//Опции для autocomplete
+    var optionsCity = {
+        getValue: function(element) {
+            // return element.name;
+            return element;
+        },
+        data: dataVal,
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true,
+                method: function(element, phrase){
+                    return (element.lastIndexOf(phrase, 0) === 0);
+                }
+            },
+            sort: {
+                enabled: false
+            },
+            onClickEvent: function(){
+                // varthis.setPointsWay(selector);
+                setCity($(selector).val());
+            },
+            onKeyEnterEvent: function(){
+                setCity($(selector).val());
+            }
+        }
+    };
+    return optionsCity;
+}
+
+function autocompleteInit(dataVal){
+    var selector = '.js-selectcity';
+    $(selector).easyAutocomplete(getOption(selector, dataVal));
+}
+
+/*City End*/
+
+
+
 
 $(function() {
     //todo: Добавить имена товаров в мобильных устройствах
 
+    autocompleteInit(cityListInit());
 
 
     if($(window).width() < 768){
@@ -261,7 +381,6 @@ $(function() {
 
         // calcEqualDevices = true;
     } else {
-
         $('.equaiments-cont').mCustomScrollbar({
             theme: "dark",
             axis:"x",
@@ -281,6 +400,21 @@ $(function() {
         });
     }
 
+    //city popup start
+    $('.js-scroll-city').mCustomScrollbar({
+        theme: "dark",
+        axis:"y",
+        callbacks:{
+            onInit: function(){
+
+            }
+        },
+        scrollInertia: 1,
+        documentTouchScroll: true,
+        contentTouchScroll: true,
+        mouseWheel: true
+    });
+    //city popup end
 
 
 

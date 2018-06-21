@@ -268,23 +268,9 @@
                             Ваш город:
                         </div>
                         <div class="txt-accent">
-                            <select name="city-select" id="city-select">
-                                <option value="Екатеринбург">
-                                    Екатеринбург
-                                </option>
-                                <option value="Пермь">
-                                    Пермь
-                                </option>
-                                <option value="Казань">
-                                    Казань
-                                </option>
-                                <option value="Питер">
-                                    Питер
-                                </option>
-                                <option value="Москва">
-                                    Москва
-                                </option>
-                            </select>
+                            <a href="javascript:void(0);" class="js-setCity" onclick="$('#citySelect').click();">
+                                Екатеринбург
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -322,6 +308,9 @@
                     </button>
                     <button class="btn-accent btn-small" onclick="$('#getBasket').click();">
                         Корзина
+                    </button>
+                    <button class="btn-accent btn-small" onclick="$('#citySelect').click();">
+                        Выбор города
                     </button>
                 </div>
 
@@ -1765,6 +1754,10 @@
         </div>
     </div>
 
+
+
+
+
 </div>
 <div id="my-footer">
     <div class="lvl1-f">
@@ -1852,7 +1845,187 @@
     </div>
 </div>
 
+
+
 <!--Modal for all pages start-->
+<div data-fancybox="" data-src="#citySelect">
+    <div id="citySelect" class="" style="display: none">
+        <div class="city-popup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="h2">
+                            Выберите свой город
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="h-city">
+                            <div class="group-i">
+                                <input type="text" onkeyup="filterCity(event)" class="js-selectcity" placeholder="Введите название своего города">
+                                <button class="btn-clear" onclick="clearFindCityInput();cityListInit();">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="11px" height="11px">
+                                        <path fill-rule="evenodd"  fill="rgb(190, 189, 189)"
+                                              d="M10.996,9.656 L9.652,10.999 L5.499,6.846 L1.346,10.999 L0.003,9.656 L4.156,5.503 L0.003,1.350 L1.346,0.006 L5.499,4.159 L9.652,0.006 L10.996,1.350 L6.843,5.503 L10.996,9.656 Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="tabs-city">
+                                <div class="tab-i active">
+                                    По алфавиту
+                                </div>
+                                <div class="tab-i">
+                                    По региону
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row city-tab-i js-char-bb active">
+                            <div class="col-12">
+                                <div class="js-scroll-city">
+                                    <div class="char-cc">
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                А
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                А
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                А
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row city-tab-i js-char-bb">
+                            <div class="col-12">
+                                <div class="js-scroll-city">
+                                    <div class="char-cc">
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div data-fancybox="" data-src="#eq-fb">
     <div id="eq-fb" style="display: none;">
         <div class="eq-title">

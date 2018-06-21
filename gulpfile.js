@@ -37,7 +37,7 @@ gulp.task('js', ['common-js'], function() {
 		'app/libs/jQueryFormStyler-master/dist/jquery.formstyler.min.js',
 		'app/libs/air-datepicker/dist/js/datepicker.min.js',
 		'app/libs/malihu-custom-scrollbar-plugin-3.1.5/jquery.mCustomScrollbar.concat.min.js',
-
+		'app/libs/EasyAutocomplete/jquery.easy-autocomplete.min.js',
 		//'app/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js',
 		// 'app/libs/Datetimepicker/datepicker-ru.js',
 		// 'app/libs/bootstrap-material-datetimepicker-gh-pages/js/moment-with-locales.min.js',
