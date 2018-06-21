@@ -20,6 +20,7 @@ $(function() {
                 phone: '',//телефон клиента
                 city: 'Екатеринбург',//Город клиента
                 deliveryType: '',//тип доставки('Самовывоз', 'Доставка курьером')
+                deliveryHouse: false, // Доставка до дома (курьером)
                 files: [],//прикрепленные файлы
                 deliveryAdress: { //адрес доставки
                     street: '',//улица
@@ -29,18 +30,95 @@ $(function() {
                 },
                 transportCompanyInfo: {
                     address: '', // адрес самовывоза
-                    companyName: '' // Название транспортной компании
+                    companyName: '', // Название транспортной компании
                 },
                 addressCompany: 'с 10.00 до 19.00. Адрес: г. Екатеринбург, ул. Предельная, 57, литер Ч.',
                 deliveryDate: '',
                 commentClient: '',
                 paymentType: 'Картой' // Способ оплаты,
             },
-            stepType: 'contactInfo',
+            stepType: 'deliveryInfo',
             deliveryCheckMode: false,
-            selDelCity: 'Екатеринбург'.toUpperCase() //город с которым идёт сравнение для вывода блока самовывоза, в шаблоне
+            selDelCity: 'Екатеринбург'.toUpperCase() //Местоположение офиса компании alarmTrade, город с которым идёт сравнение для вывода блока самовывоза, в шаблоне
         }, 
         computed: {
+            deliveryHouse: function (){ // Есть доставка курьером, до дома
+
+                var str = this.orderInfo.transportCompanyInfo.companyName;
+                var result = str.match( /пункт/i ); /// Если есть слово "пункт"
+
+                if(!str){ // Если поле this.orderInfo.transportCompanyInfo.companyName не заполнено
+                    result = false;
+                }else {
+                    result = result !== null;
+                }
+
+
+
+                if(this.orderInfo.deliveryHouse || result){
+                    return true;
+                }
+
+                return result;
+            },
+            //Для блока доставки, скрывать/показывать блоки show*
+            /*
+            * 1) Выберите способ доставки (ёбург) - showChoiceDelOfice
+            * 2) Адрес Самовывоза (Ёбург) - showSelfOfice
+            * 3) Транспортная компания - showTransCompany
+            * 4) Адрес доставки - showInputsSelfDelivery
+            * 5) Добавить комментарий - showComment
+            * 6) Выберите дату - showDate
+            * 7) Адрес самовывоза: (пункты выдачи)
+            * */
+            showDate: function () {
+              if(this.showInputsSelfDelivery){
+                  return true;
+              }else {
+                  return false;
+              }
+            },
+            showComment: function () {
+                if(this.deliveryHouse){
+                    return true;
+                }else {
+                    return false;
+                }
+            },
+            showTransCompany: function () {
+
+                if(this.orderInfo.city.toUpperCase() != this.selDelCity.toUpperCase()){
+                    return true;
+                }else {
+                    return false;
+                }
+            },
+            showChoiceDelOfice: function () {
+                if(this.orderInfo.city.toUpperCase() == this.selDelCity.toUpperCase()){
+                    return true;
+                }else {
+                    return false;
+                }
+            },
+            showSelfOfice: function () {
+                if(this.orderInfo.deliveryType == 'Самовывоз'
+                    && this.orderInfo.city.toUpperCase() == this.selDelCity){
+                    return true;
+                }else {
+                    return false;
+                }
+            },
+            showInputsSelfDelivery: function () {
+                if( this.orderInfo.deliveryHouse
+                    && this.deliveryHouse
+                ){
+                    return true;
+                } else {
+                    return false;
+                }
+
+
+            }
 
         },
         methods: {
@@ -66,9 +144,10 @@ $(function() {
 
                 if(selectedCity.toUpperCase() != 'Пермь'.toUpperCase()){
                     this.orderInfo.deliveryType = 'Доставка курьером';
+                    this.orderInfo.deliveryHouse = true;
                 }
 
-                if(selectedCity.toUpperCase() == 'Пермь'.toUpperCase() && this.orderInfo.deliveryType == 'Доставка курьером'){
+                if(selectedCity.toUpperCase() == 'Пермь'.toUpperCase() && this.orderInfo.deliveryHouse){
                     $('#taxDel').click()
                 }
 

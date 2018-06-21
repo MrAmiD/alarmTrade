@@ -1335,10 +1335,15 @@ button
 	padding: 0 20px
 	margin-top: 15px
 	&.hit-label
-		position: relative
-		overflow: hidden
+		//position: relative
+		//overflow: hidden
 		.tab-content-i
 			padding-top: 50px
+		&:hover
+			.cheep-c
+				display: flex
+			.btn-c
+				display: flex
 		&:after
 			content: attr(cont)
 			position: absolute
@@ -1347,7 +1352,7 @@ button
 			width: 100%
 			text-align: center
 			top: 0px
-			z-index: 2
+			z-index: 12
 			left: 50%
 			transform: translate(-50%, 0)
 			text-transform: uppercase
@@ -1366,8 +1371,8 @@ button
 			border-width: 15px 117.5px 0 117.5px
 			border-color: $accent2 transparent transparent transparent
 			left: 50%
+			z-index: 12
 			transform: translate(-50%, 0)
-
 	&.short-cart  
 		.cheep-c
 			display: none
@@ -1376,7 +1381,7 @@ button
 		.tab-content-i
 			position: relative
 			transition: all .3s
-		&:hover
+		&:not(.hit-column):hover
 			.tab-content-i
 				position: absolute
 				background: #FFFFFF
