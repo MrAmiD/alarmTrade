@@ -5,7 +5,7 @@
 
 	<meta charset="utf-8">
 
-	<title>Оформление заказа 2а</title>
+	<title>AlarmTrade</title>
 	<meta name="description" content="">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -269,9 +269,23 @@
 							Ваш город:
 						</div>
 						<div class="txt-accent">
-							<a href="javascript:void(0);" class="js-setCity" onclick="$('#citySelect').click();">
-								Екатеринбург
-							</a>
+							<select name="city-select" id="city-select">
+								<option value="Екатеринбург">
+									Екатеринбург
+								</option>
+								<option value="Пермь">
+									Пермь
+								</option>
+								<option value="Казань">
+									Казань
+								</option>
+								<option value="Питер">
+									Питер
+								</option>
+								<option value="Москва">
+									Москва
+								</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -283,497 +297,560 @@
 		<div class="row">
 			<div class="col-12">
 				<h1 class="title-page">
-					Оформление заказа
+					Купить автосигнализацию Pandora DX-90B
 				</h1>
 			</div>
 		</div>
 	</div>
 
-	<div class="container" id="vueCont">
-		<div class="row basket-order-r">
-			<div class="col-12 col-lg-9 basket-order-cl">
-				<div v-show="stepType != 'getOrder' " class="basket-order-i">
-					<div class="tab-c">
-						<button class="btn-tr" :class="getActiveStep('contactInfo')" @click="changeStepType('contactInfo', $event)">
-							Контактная информация
-						</button>
-						<button class="btn-tr " :class="getActiveStep('deliveryInfo')" @click="changeStepType('deliveryInfo', $event)">
-							Способ доставки
-						</button>
-						<button class="btn-tr" :class="getActiveStep('paymentInfo')" @click="changeStepType('paymentInfo', $event)">
-							Оплата
-						</button>
-					</div>
-					<div class="steps-c">
-						<div v-show="stepType == 'contactInfo'" class="step-i contactInfo-step active">
-							<div class="row">
-								<div class="col-12">
-									<div class="group-type">
-										<div class="i-group fiz-group">
-											<input class="vue-input" value="fizik" data-model="clientType" v-model="orderInfo.clientType" type="radio" name="clientType" checked id="fizik">
-											<label for="fizik">
-												Физическое лицо
-											</label>
-										</div>
-										<div class="i-group">
-											<input class="vue-input" value="urik" data-model="clientType" v-model="orderInfo.clientType" type="radio" name="clientType" id="urik">
-											<label for="urik">
-												Юридическое лицо
-											</label>
-										</div>
-									</div>
-									<div class="i-group-ct">
-										<div class="row">
-											<div class="col-12 col-lg-6">
-												<div class="i-group-txt">
-													<label for="clientName">Фамилия, Имя *</label>
-													<input type="text" v-model="orderInfo.name" id="clientName">
-												</div>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="i-group-txt">
-													<label for="clientPhone">Номер телефона *</label>
-													<input class="vue-input" id="clientPhone" v-model="orderInfo.phone" v-mask="'# (###) ###-##-##'" type="tel" name="clientPhone" >
-												</div>
-											</div>
-											<div class="col-12 col-lg-6">
-												<div class="i-group-txt">
-													<label for="clientEmail">E-mail *</label>
-													<input type="text" v-model="orderInfo.email" id="clientEmail">
-												</div>
-											</div>
-											<div v-show="orderInfo.clientType == 'urik'" class="col-12 col-lg-6">
-												<div class="i-group-txt">
-													<label for="clientEmail">Загрузите реквизиты в формате: PDF, DOC, XLS, PNG, JPG</label>
-													<input ref="myFiles" @change="previewFiles"  class="vue-input" data-browse="Обзор" data-placeholder="Мы отправим счет вам на E-mail"  class="inputfile" type="file" multiple="multiple">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12">
-									<div class="btn-c">
-										<a href="/catalog" class="btn-grey">
-											Вернуться в магазин
-										</a>
-										<button class="btn-grey" @click="changeStepType('deliveryInfo')">
-											Далее
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div v-show="stepType == 'deliveryInfo'" class="step-i delivery-step">
-							<div class="row">
-								<div  class="col-12 selfDelivery-s selCityDel">
-									<div class="row">
-										<!--Для Всех городов, кроме selDelCity, доставка транспортной компанией-->
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="fotorama  txtShild bigShild" cont="Sale" data-allowfullscreen="true" data-nav="thumbs" data-thumbmargin="15" data-thumbwidth="174px" data-thumbheight="106px">
 
-										<div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12">
-											<div class="h3 notOficeTitle">
-												Выберите способ доставки:
-											</div>
-										</div>
-										<div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12 col-md-6">
-											<div class="h3" :class="{'errorTxt': deliveryCheckMode == true && !orderInfo.transportCompanyInfo.companyName }">
-												Транспортная компания
-											</div>
-											<div class="group-inpt transport-c">
-												<div class="i-group">
-													<input class="vue-input" value="Курьерская доставка EMS"
-														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
-														   type="radio" name="transcomp"
-														   checked id="transcomp1">
-													<label for="transcomp1">
-														Курьерская доставка EMS
-													</label>
-												</div>
-												<div class="i-group">
-													<input class="vue-input" value="Курьерская доставка СДЭК"
-														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
-														   type="radio" name="transcomp"
-														   checked id="transcomp2">
-													<label for="transcomp2">
-														Курьерская доставка СДЭК
-													</label>
-												</div>
-												<div class="i-group">
-													<input class="vue-input" value="Пункт выдачи СДЭК"
-														   data-model="transportCompanyInfo.companyName" v-model="orderInfo.transportCompanyInfo.companyName"
-														   type="radio" name="transcomp"
-														   checked id="transcomp3">
-													<label for="transcomp3">
-														Пункт выдачи СДЭК
-													</label>
-												</div>
-											</div>
-										</div>
-										<div v-show="showDelPoints" class="col-12 col-md-6" >
-											<div v-show="orderInfo.transportCompanyInfo.companyName" class="h3">
-												Адрес самовывоза:
-											</div>
-											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'}" class="group-inpt transport-c">
-												<div class="my-select vue-select">
-													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress">
-														<option value="Павла шаманова 5/1">
-															Павла шаманова 5/1
-														</option>
-														<option value="Павла шаманова 5/2">
-															Павла шаманова 5/2
-														</option>
-														<option value="Павла шаманова 5/3">
-															Павла шаманова 5/3
-														</option>
-													</select>
-												</div>
-											</div>
-											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'}" class="group-inpt transport-c">
-												<div class="my-select vue-select">
-													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress2">
-														<option value="Курьерская доставка СДЭК 1">
-															Курьерская доставка СДЭК 1
-														</option>
-														<option value="Курьерская доставка СДЭК 2">
-															Курьерская доставка СДЭК 2
-														</option>
-														<option value="Курьерская доставка СДЭК 3">
-															Курьерская доставка СДЭК 3
-														</option>
-													</select>
-												</div>
-											</div>
-											<div v-show="orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'}" class="group-inpt transport-c">
-												<div class="my-select vue-select">
-													<select class="vue-select transportAddress" name="transportAddress" id="transportAddress3">
-														<option value="Пункт выдачи СДЭК 1">
-															Пункт выдачи СДЭК 1
-														</option>
-														<option value="Пункт выдачи СДЭК 2">
-															Пункт выдачи СДЭК 2
-														</option>
-														<option value="Пункт выдачи СДЭК 3">
-															Пункт выдачи СДЭК 3
-														</option>
-													</select>
-												</div>
-											</div>
-										</div>
-
-
-										<!--Выберите способ доставки:-->
-										<div v-show="showChoiceDelOfice" class="col-12 col-md-6">
-											<div class="h3">
-												Выберите способ доставки:
-											</div>
-											<div class="group-inpt">
-												<div class="i-group">
-													<input class="vue-input" checked value="Доставка курьером" data-model="deliveryType" v-model="orderInfo.deliveryType" type="radio" name="delivery" id="taxDel">
-													<label for="taxDel">
-														Доставка курьером (бесплатно) с 10:00 до 21:00
-													</label>
-												</div>
-												<div class="i-group">
-													<input class="vue-input" type="radio" name="delivery"  value="Самовывоз" data-model="deliveryType" v-model="orderInfo.deliveryType" id="selfDel">
-													<label for="selfDel">
-														Самовывоз (бесплатно) с 10:00 до 19:00
-													</label>
-												</div>
-
-												<!--<div class="i-group" v-show="selDelCity !== orderInfo.city">-->
-													<!--<input class="vue-input" value="Транспортная компания" data-model="deliveryType" v-model="orderInfo.deliveryType" type="radio" name="delivery" id="transDel">-->
-													<!--<label for="transDel">-->
-														<!--Транспортная компания-->
-													<!--</label>-->
-												<!--</div>-->
-
-											</div>
-										</div>
-										<!--Адрес доставки:-->
-										<div v-show="showInputsSelfDelivery && !showSelfOfice && !showDelPoints" class="col-12 col-md-6">
-											<div class="h3">
-												Адрес доставки:
-											</div>
-											<div class="address-cc">
-												<input v-model="orderInfo.deliveryAdress.street" class="vue-input" type="text" name="street" id="street" placeholder="Улица">
-											</div>
-											<div class="address-c">
-												<input v-model="orderInfo.deliveryAdress.lit" class="vue-input" type="text" name="lit" id="lit" placeholder="Корпус">
-												<input v-model="orderInfo.deliveryAdress.house" class="vue-input" type="text" name="house" id="house" placeholder="Дом">
-												<input v-model="orderInfo.deliveryAdress.apartament" class="vue-input" type="text" name="apartament" id="apartament" placeholder="Квартира">
-											</div>
-										</div>
-										<!--Адрес Самовывоза:-->
-										<div v-show="showSelfOfice" class="col-12 col-md-6">
-											<div class="h3">
-												Адрес Самовывоза:
-											</div>
-											<p class="selfAddr">
-												{{orderInfo.addressCompany}}
-											</p>
-										</div>
-										<!--
-											1) Выберите способ доставки (ёбург)
-											2) Адрес Самовывоза (Ёбург)
-											3) Транспортная компания
-											4) Адрес доставки
-											5) Добавить комментарий
-											6) Выберите дату
-											7) Адрес самовывоза: (пункты выдачи)
-										-->
-										<!--Для транспортной компании start-->
-
-										<!--todo: при переключении способа доставки для Еката, если самовывоз, то this.orderInfo.deliveryHouse = false -->
-										<!--todo: Отработать всю логику блока "Способ доставки" до конца-->
-
-										<!--Для транспортной компании end-->
-										<div v-show="showComment" class="col-12 col-md-6">
-											<div class="h3">
-												Добавить комментарий:
-											</div>
-											<textarea v-model="orderInfo.commentClient" name="msg-cc" id="msg-cc" cols="30" rows="10"></textarea>
-										</div>
-										<div v-show="showDate" class="col-12 col-md-6">
-											<div class="h3">
-												Выберите дату:
-											</div>
-											<input v-model="orderInfo.deliveryDate" placeholder="ДД/ММ/ГГГГ" type="text" class='datepicker-here vue-input'>
-										</div>
-									</div>
-								</div>
-
-							</div>
-							<div class="row">
-								<div class="col-12">
-									<div class="btn-c">
-										<button class="btn-grey" @click="changeStepType('contactInfo')">
-											Назад
-										</button>
-										<button class="btn-grey" @click="changeStepType('paymentInfo')">
-											Далее
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div v-show="stepType == 'paymentInfo'" class="step-i payment-step">
-							<div class="h3">
-								Выберите способ оплаты:
-							</div>
-							<div class="row payment-type-r">
-								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
-									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Картой'}"  @click="setPaymentType('Картой')">
-										<div class="payments-c">
-											<div class="pay-i">
-												<div class="bg-visa"></div>
-											</div>
-											<div class="pay-i">
-												<div class="bg-master"></div>
-											</div>
-											<div class="pay-i">
-												<div class="bg-maestro"></div>
-											</div>
-											<div class="pay-i">
-												<div class="bg-trash"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
-									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Яндекс деньги'}" @click="setPaymentType('Яндекс деньги')">
-										<div class="svg-c">
-											<img src="img/yam.png" alt="">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
-									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Яндекс в кредит'}" @click="setPaymentType('Яндекс в кредит')">
-										<div class="svg-c">
-											<img src="img/yacred.png" alt="">
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-md-6 col-lg-4 payment-type-c">
-									<div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Оплата при получении'}" @click="setPaymentType('Оплата при получении')">
-										<div class="svg-c">
-											<img src="img/selfPayment.png" alt="">
-											<p>
-												Оплата при получении
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-12">
-									<div class="btn-c">
-										<button class="btn-grey" @click="changeStepType('deliveryInfo')">
-											Назад
-										</button>
-										<button id="order-btn" data-order="896755" class="btn-grey" @click="changeStepType('getOrder')">
-											Оформить заказ
-										</button>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
+					<img src="img/cat1.png" alt="asas">
+					<img src="img/cat1.png" alt="asas">
+					<img src="img/cat1.png" alt="asas">
+					<img src="img/cat1.png" alt="asas">
 				</div>
-				<div v-show="stepType == 'getOrder'" class="basket-order-i formateOrder">
-					<div class="row">
-						<div class="col-12 col-lg-4">
-							<div class="h3">
-								Контактные данные:
-							</div>
-							<p>
-								<br>
-								Фамилия Имя: {{orderInfo.name}} <br>
-								Телефон: {{orderInfo.phone}} <br>
-								E-mail: {{orderInfo.email}}
-							</p>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="content">
+					<p>
+						В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+						льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+					</p>
+
+					<div class="prices-c">
+						<div class="oldPrice">
+							17 900р.
 						</div>
-						<div class="col-12 col-lg-4">
-							<div class="h3">
-								Доставка:
-							</div>
-							<p>
-								<br>
-								{{orderInfo.city}} <br>
-
-								<template v-if="!showDelPoints">
-									{{orderInfo.deliveryType}} <br>
-								</template>
-
-
-								<template v-if="showSelfOfice">
-									{{orderInfo.deliveryDate}},
-									{{orderInfo.addressCompany}}
-								</template>
-
-								<template v-if="showTransCompany && showDelPoints">
-									Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
-									Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
-								</template>
-
-								<template v-if="showTransCompany && !showDelPoints">
-									Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
-								</template>
-
-								<template v-if="showInputsSelfDelivery">
-									{{orderInfo.deliveryDate}},
-									ул. {{orderInfo.deliveryAdress.street}},
-									лит. - {{orderInfo.deliveryAdress.lit}},
-									д. {{orderInfo.deliveryAdress.house}},
-									кв. {{orderInfo.deliveryAdress.apartament}}
-								</template>
-
-							</p>
+						<div class="currPrice">
+							15 900р.
 						</div>
-						<div class="col-12 col-lg-4">
-							<div class="h3">
-								Способ оплаты:
-							</div>
-							<p>
-								<br>
-								{{orderInfo.paymentType}}
-							</p>
-						</div>
-						<div class="col-12 col-lg-4">
-							<button class="btn-grey small-btn" @click="changeStepType('contactInfo')">
-								Редактировать
+					</div>
+					<div class="cheep-c justify-content-start">
+						<img src="img/yandexMoney.jpg" alt="">
+						<p class="txt">
+							Купить за 9 850,45 Р/мес.
+						</p>
+					</div>
+
+					<div class="disables-cb">
+						<input type="checkbox" id="haveScope" checked>
+						<label for="haveScope" class="txt-accent">
+							Есть в наличии
+						</label>
+					</div>
+
+					<div class="disables-cb notHaveScope">
+						<input type="checkbox" id="notHaveScope" checked>
+						<label for="notHaveScope" class="txt-accent">
+							Нет в наличии
+						</label>
+					</div>
+
+					<div class="count-trigger">
+						<p>Количество</p>
+						<input type="number" max="20" min="1" value="1">
+						<button class="btn-accent btn-small">
+							В корзину
+						</button>
+						<div class="fav-btn">
+							<button class="sq-btn sq-like ">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+									<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+								</svg>
 							</button>
-							<div class="final-price">
-								<div class="h3">
-									Сумма заказа 5 500 рублей
-								</div>
-								<button class="btn-accent btn-small">
-									Оплатить
+							<button class="sq-btn sq-eq">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+									<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
+
+					<div class="delivery-txt">
+						<div class="delivery-txt-i">
+							<div class="sq-btn">
+								<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										width="11px" height="22px">
+									<path fill-rule="evenodd"  fill="rgb(27, 27, 27)"
+										  d="M9.760,12.602 C7.689,12.100 6.404,10.843 5.813,8.945 C5.531,8.040 5.427,7.113 5.529,6.168 C5.577,5.727 5.937,5.402 6.391,5.417 C6.869,5.433 7.224,5.773 7.209,6.228 C7.182,7.039 7.212,7.841 7.478,8.623 C7.904,9.874 8.752,10.723 10.134,11.046 C10.552,11.143 10.865,11.321 11.000,11.718 C11.000,11.819 11.000,11.919 11.000,12.019 C10.740,12.608 10.421,12.762 9.760,12.602 ZM7.721,4.348 C6.269,4.384 5.187,3.348 5.260,1.992 C5.303,1.189 5.940,0.403 6.782,0.115 C6.903,0.074 7.027,0.038 7.150,-0.000 C7.440,-0.000 7.731,-0.000 8.021,-0.000 C8.716,0.164 9.269,0.504 9.640,1.098 C10.494,2.464 9.412,4.305 7.721,4.348 ZM7.918,5.547 C8.081,5.915 8.112,6.303 8.088,6.704 C8.041,7.481 8.012,8.261 8.023,9.041 C8.024,9.116 8.047,9.197 7.983,9.281 C7.876,9.243 7.857,9.144 7.821,9.067 C7.549,8.492 7.418,7.886 7.363,7.261 C7.332,6.911 7.369,6.562 7.368,6.213 C7.365,5.716 6.973,5.312 6.478,5.287 C5.880,5.258 5.431,5.588 5.383,6.125 C5.267,7.428 5.438,8.693 6.025,9.892 C6.588,11.043 7.477,11.895 8.716,12.413 C8.961,12.515 9.070,12.725 9.204,12.910 C9.998,14.011 10.511,15.218 10.721,16.533 C10.904,17.679 10.823,18.813 10.548,19.939 C10.447,20.351 10.314,20.754 10.163,21.151 C9.907,21.822 9.192,22.153 8.487,21.932 C7.822,21.723 7.454,21.047 7.677,20.389 C7.863,19.843 8.040,19.296 8.124,18.728 C8.265,17.765 8.199,16.817 7.871,15.890 C7.860,15.858 7.844,15.828 7.818,15.769 C7.505,17.229 7.000,18.584 6.114,19.797 C5.693,20.373 5.208,20.894 4.643,21.349 C3.918,21.932 2.919,21.758 2.523,20.979 C2.274,20.489 2.409,19.892 2.879,19.520 C3.587,18.960 4.119,18.279 4.508,17.498 C4.964,16.582 5.219,15.614 5.350,14.614 C5.363,14.515 5.378,14.416 5.390,14.316 C5.391,14.304 5.381,14.291 5.363,14.242 C5.246,14.433 5.144,14.604 5.039,14.773 C4.834,15.101 4.636,15.160 4.282,14.972 C3.265,14.433 2.253,13.887 1.239,13.343 C0.935,13.179 0.634,13.010 0.326,12.851 C0.179,12.775 0.064,12.680 -0.000,12.534 C-0.000,12.463 -0.000,12.391 -0.000,12.319 C0.491,11.520 0.983,10.721 1.473,9.920 C1.565,9.770 1.673,9.648 1.876,9.644 C2.022,9.641 2.034,9.525 2.072,9.438 C2.415,8.639 2.825,7.873 3.321,7.149 C3.698,6.599 4.135,6.094 4.649,5.649 C4.765,5.549 4.851,5.417 4.958,5.306 C5.435,4.806 6.009,4.494 6.749,4.573 C7.371,4.639 7.697,5.051 7.918,5.547 ZM4.231,7.064 C3.539,7.910 3.043,8.847 2.624,9.823 C2.574,9.938 2.650,9.977 2.732,10.021 C2.963,10.144 3.195,10.268 3.427,10.392 C3.720,10.548 4.014,10.704 4.360,10.887 C4.051,9.582 4.041,8.328 4.231,7.064 Z"/>
+								</svg>
+							</div>
+							<p>
+								Самовывоз: сегодня с 10.00 до 19.00. Адрес: г. Екатеринбург, ул. Предельная, 57, литер Ч.
+							</p>
+						</div>
+						<div class="delivery-txt-i">
+							<div class="sq-btn">
+								<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:xlink="http://www.w3.org/1999/xlink"
+										width="23px" height="11px">
+									<path fill-rule="evenodd"  fill="rgb(27, 27, 27)"
+										  d="M20.673,9.754 C20.475,10.145 20.214,10.483 19.822,10.703 C19.434,10.920 19.016,11.044 18.575,10.973 C17.504,10.798 16.655,9.927 16.812,8.664 C16.900,7.962 17.296,7.429 17.950,7.137 C18.595,6.849 19.251,6.923 19.894,7.198 C19.445,6.888 18.949,6.718 18.421,6.843 C17.522,7.056 16.890,7.563 16.680,8.515 C16.568,9.024 16.537,9.018 15.983,9.018 C13.278,9.018 10.574,9.018 7.870,9.018 C7.700,9.018 7.526,9.043 7.341,8.908 C7.394,9.146 7.546,9.095 7.657,9.095 C10.048,9.098 12.438,9.097 14.829,9.097 C15.279,9.097 15.730,9.096 16.181,9.098 C16.275,9.098 16.400,9.074 16.437,9.183 C16.497,9.364 16.522,9.568 16.454,9.743 C16.396,9.895 16.214,9.835 16.083,9.835 C13.258,9.838 10.433,9.837 7.608,9.840 C7.449,9.840 7.306,9.826 7.206,9.676 C6.665,10.917 5.431,11.174 4.604,10.857 C3.735,10.524 3.270,9.794 3.286,8.905 C3.295,8.408 3.478,7.969 3.812,7.602 C4.378,6.980 5.108,6.874 5.910,6.983 C5.784,6.905 5.661,6.842 5.533,6.830 C4.847,6.764 4.246,6.979 3.744,7.435 C3.370,7.775 3.185,8.230 3.106,8.720 C3.067,8.964 2.945,9.025 2.713,9.022 C1.941,9.010 1.168,9.018 0.395,9.017 C0.003,9.017 -0.006,9.008 -0.006,8.609 C-0.006,5.870 -0.006,3.130 -0.006,0.391 C-0.006,0.335 -0.005,0.279 -0.004,0.223 C-0.002,0.069 0.094,-0.002 0.231,0.017 C0.522,0.058 0.809,0.005 1.098,0.006 C5.315,0.019 9.531,0.037 13.748,0.026 C14.471,0.025 15.064,0.270 15.606,0.693 C16.837,1.654 17.902,2.779 18.878,3.990 C18.969,4.102 19.064,4.192 19.219,4.235 C19.903,4.423 20.611,4.530 21.262,4.830 C21.619,4.994 21.992,5.122 22.307,5.365 C22.803,5.749 22.899,6.323 22.972,6.877 C23.053,7.485 23.008,8.105 22.978,8.719 C22.969,8.908 22.869,9.024 22.652,9.019 C22.233,9.011 21.815,9.017 21.396,9.018 C20.929,9.018 20.930,9.018 20.866,8.579 C20.862,8.550 20.856,8.522 20.851,8.493 C20.812,8.919 20.876,9.354 20.673,9.754 ZM17.552,3.870 C17.634,3.870 17.746,3.909 17.785,3.801 C17.818,3.713 17.724,3.663 17.675,3.604 C17.225,3.063 16.757,2.536 16.244,2.057 C15.674,1.525 15.123,0.953 14.326,0.736 C14.223,0.709 14.124,0.691 14.019,0.691 C13.054,0.691 12.088,0.697 11.122,0.685 C10.884,0.683 10.822,0.763 10.825,0.989 C10.837,1.827 10.829,2.665 10.830,3.504 C10.831,3.837 10.844,3.837 11.180,3.852 C12.226,3.899 13.271,3.852 14.103,3.872 C15.395,3.872 16.473,3.873 17.552,3.870 ZM19.605,8.937 C19.600,8.495 19.262,8.200 18.781,8.194 C18.302,8.188 18.006,8.595 18.001,8.973 C17.996,9.307 18.319,9.768 18.829,9.731 C19.280,9.728 19.609,9.391 19.605,8.937 ZM5.306,8.196 C4.834,8.196 4.535,8.500 4.536,8.981 C4.537,9.414 4.855,9.731 5.289,9.731 C5.775,9.732 6.082,9.426 6.081,8.945 C6.080,8.492 5.774,8.196 5.306,8.196 ZM0.759,7.362 C0.759,7.434 0.737,7.520 0.841,7.530 C0.962,7.541 0.957,7.438 0.957,7.362 C0.959,6.204 0.958,5.047 0.956,3.889 C0.956,3.821 0.963,3.725 0.863,3.725 C0.763,3.725 0.769,3.821 0.769,3.889 C0.766,4.480 0.767,5.071 0.767,5.662 C0.765,5.662 0.762,5.662 0.759,5.662 C0.759,6.228 0.760,6.795 0.759,7.362 ZM21.885,6.280 C22.045,6.290 22.120,6.226 22.120,6.059 C22.120,5.898 22.079,5.794 21.893,5.801 C21.773,5.805 21.652,5.804 21.532,5.800 C21.353,5.795 21.200,5.792 21.202,6.050 C21.204,6.303 21.360,6.282 21.524,6.280 C21.572,6.280 21.620,6.280 21.669,6.280 C21.741,6.280 21.813,6.276 21.885,6.280 Z"/>
+								</svg>
+							</div>
+							<p>
+								Доставка в г. Первоуральск - 2 рабочих дня
+							</p>
+						</div>
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row catalog-tab-r">
+			<div class="col-12 catalog-tab-c">
+				<div class="catalog-tab-i">
+					<div class="row tab-trigger-r small-tab">
+						<div class="col-12 tab-trigger-c">
+							<div class="tab-trigger-i">
+								<button class="tab-b active">
+									Описание
+								</button>
+								<button class="tab-b">
+									Комплектация
+								</button>
+								<button class="tab-b">
+									Гарантия
+								</button>
+								<button class="tab-b">
+									Условия покупки и доставки
+								</button>
+								<button class="tab-b">
+									Инструкции и ПО
 								</button>
 							</div>
 						</div>
 					</div>
+					<div class="tab-content-cc">
+						<div class="row tab-content-r active">
+							<div class="col-12 col-lg-12 tab-content-c">
+								<div class="tab-content-i tab-content-standart">
+									<div class="content">
+										<p>
+											В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+											льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+										</p>
+										<p>
+											Линейка Pandora LX является бюджетной и предназначается преимущественно для автомобилей без CAN-шин и отечественных автомобилей. Системы данной линейки управляются с помощью ЖК-брелоков и обеспечивают все необходимые сервисные функции — автозапуск, турботаймер, управление предпусковыми подогревателями и т.д.
+										</p>
+										<p>
+											Флагманом линейки автомобильных охранно телематических комплексов Pandora является модель 5000 Pro.
+										</p>
+									</div>
+
+
+									<!--Конструктор блока "поделиться"-->
+									<!--https://tech.yandex.ru/share/-->
+									<div class="share-soc">
+										<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+										<script src="//yastatic.net/share2/share.js"></script>
+										<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,lj,telegram"></div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="row tab-content-r">
+							<div class="col-12 col-lg-12 tab-content-c">
+								<div class="tab-content-i tab-content-standart">
+									<div class="content">
+										<p>
+											В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+											льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+										</p>
+										<p>
+											Линейка Pandora LX является бюджетной и предназначается преимущественно для автомобилей без CAN-шин и отечественных автомобилей. Системы данной линейки управляются с помощью ЖК-брелоков и обеспечивают все необходимые сервисные функции — автозапуск, турботаймер, управление предпусковыми подогревателями и т.д.
+										</p>
+										<p>
+											Флагманом линейки автомобильных охранно телематических комплексов Pandora является модель 5000 Pro.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row tab-content-r">
+							<div class="col-12 col-lg-12 tab-content-c">
+								<div class="tab-content-i tab-content-standart">
+									<div class="content">
+										<p>
+											В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+											льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+										</p>
+										<p>
+											Линейка Pandora LX является бюджетной и предназначается преимущественно для автомобилей без CAN-шин и отечественных автомобилей. Системы данной линейки управляются с помощью ЖК-брелоков и обеспечивают все необходимые сервисные функции — автозапуск, турботаймер, управление предпусковыми подогревателями и т.д.
+										</p>
+										<p>
+											Флагманом линейки автомобильных охранно телематических комплексов Pandora является модель 5000 Pro.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row tab-content-r">
+							<div class="col-12 col-lg-12 tab-content-c">
+								<div class="tab-content-i tab-content-standart">
+									<div class="content">
+										<p>
+											В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+											льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+										</p>
+										<p>
+											Линейка Pandora LX является бюджетной и предназначается преимущественно для автомобилей без CAN-шин и отечественных автомобилей. Системы данной линейки управляются с помощью ЖК-брелоков и обеспечивают все необходимые сервисные функции — автозапуск, турботаймер, управление предпусковыми подогревателями и т.д.
+										</p>
+										<p>
+											Флагманом линейки автомобильных охранно телематических комплексов Pandora является модель 5000 Pro.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row tab-content-r">
+							<div class="col-12 col-lg-12 tab-content-c">
+								<div class="tab-content-i tab-content-standart">
+									<div class="content">
+										<p>
+											В сигнализациях Pandora применяются самые современные технологии, позволяющие обеспечить беспрецедентный уровень охраны и сервиса.
+											льно насыщенная линейка Pandora DXL предлагает пользователям широкие возможности телематики — управления автомобилем и его охраной со своего телефона или компьютера.
+										</p>
+										<p>
+											Линейка Pandora LX является бюджетной и предназначается преимущественно для автомобилей без CAN-шин и отечественных автомобилей. Системы данной линейки управляются с помощью ЖК-брелоков и обеспечивают все необходимые сервисные функции — автозапуск, турботаймер, управление предпусковыми подогревателями и т.д.
+										</p>
+										<p>
+											Флагманом линейки автомобильных охранно телематических комплексов Pandora является модель 5000 Pro.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
-			<div class="col-12 col-lg-3 basket-order-cr">
-				<div class="bascet-list">
-					<div class="title-b">
-						Ваш заказ:
-					</div>
-					<div class="item-c">
-						<div class="item-b">
-							<div class="item-i">
-								<div class="good-name">
-									<div class="svg-c">
-										<svg
-												xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink"
-												width="12px" height="11px">
-											<path fill-rule="evenodd"  fill="rgb(18, 18, 18)"
-												  d="M11.997,3.053 C11.916,3.058 11.836,3.067 11.755,3.067 C7.918,3.068 4.082,3.068 0.245,3.067 C0.164,3.067 0.083,3.058 0.003,3.053 C0.003,2.074 0.004,1.096 0.000,0.117 C-0.000,0.021 0.022,-0.000 0.115,0.000 C4.038,0.003 7.962,0.003 11.885,0.000 C11.978,-0.000 12.000,0.021 12.000,0.117 C11.996,1.096 11.997,2.074 11.997,3.053 ZM0.847,3.649 C4.282,3.649 7.717,3.649 11.152,3.649 C11.410,3.649 11.412,3.650 11.412,3.911 C11.412,6.186 11.412,8.461 11.412,10.736 C11.412,10.998 11.410,11.000 11.153,11.000 C9.436,11.000 7.718,11.000 6.000,11.000 C4.283,11.000 2.565,11.000 0.848,11.000 C0.590,11.000 0.588,10.998 0.588,10.737 C0.588,8.462 0.588,6.187 0.588,3.912 C0.588,3.650 0.590,3.649 0.847,3.649 ZM4.839,6.086 C5.232,6.097 5.625,6.089 6.018,6.088 C6.404,6.088 6.791,6.097 7.177,6.085 C7.527,6.075 7.789,5.804 7.781,5.485 C7.774,5.167 7.522,4.907 7.179,4.903 C6.394,4.893 5.608,4.894 4.822,4.903 C4.559,4.905 4.354,5.034 4.260,5.298 C4.119,5.693 4.396,6.075 4.839,6.086 Z"/>
-										</svg>
-									</div>
-									<div class="txt">
-										Сигнализация
+		</div>
+
+		<div class="row same-prod">
+			<div class="col-12">
+				<div class="h2">
+					Похожие товары
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="catalog-cv">
+					<div class="row">
+						<div class="col-12">
+							<div class="same-slider">
+								<div class="same-i">
+									<div class="tab-content-c short-cart ">
+										<div class="tab-content-i blackShild txtShild" cont="Hit!">
+											<a href="" class="title-h">
+										<span class="txt">
+											Pandora DX-90B
+										</span>
+											</a>
+											<a href="">
+												<div class="prev-c">
+													<div class="prev" style="background-image: url('img/box.png')">
+
+													</div>
+												</div>
+											</a>
+
+											<div class="price-c">
+												<button class="sq-btn sq-like ">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+													</svg>
+												</button>
+												<div class="price-txt">
+													<strong>12 000</strong> руб.
+												</div>
+												<button class="sq-btn sq-eq">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+													</svg>
+												</button>
+											</div>
+
+											<div class="cheep-c">
+												<img src="img/yandexMoney.jpg" alt="">
+												<p class="txt">
+													Купить за 9 850,45 Р/мес.
+												</p>
+											</div>
+
+											<div class="btn-c">
+												<a href="javascript:void(0)" class="btn-dark">
+													Подробнее
+												</a>
+												<a href="javascript:void(0)" class="btn-dark">
+											<span class="svg-c">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="12px">
+													<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M13.178,4.592 C12.963,5.461 12.749,6.330 12.533,7.198 C12.466,7.469 12.333,7.573 12.062,7.574 C10.971,7.574 9.881,7.574 8.790,7.574 C7.691,7.574 6.592,7.574 5.493,7.574 C5.321,7.574 5.319,7.575 5.359,7.740 C5.431,8.040 5.511,8.338 5.578,8.639 C5.602,8.747 5.651,8.777 5.757,8.777 C7.725,8.774 9.693,8.774 11.661,8.774 C11.699,8.774 11.736,8.774 11.774,8.774 C12.040,8.776 12.227,8.950 12.224,9.195 C12.222,9.432 12.035,9.604 11.776,9.604 C10.460,9.605 9.144,9.604 7.827,9.604 C7.013,9.605 6.198,9.605 5.383,9.605 C5.059,9.605 4.941,9.513 4.863,9.194 C4.269,6.783 3.676,4.372 3.083,1.961 C3.021,1.711 2.958,1.462 2.903,1.210 C2.881,1.112 2.840,1.072 2.734,1.074 C2.249,1.080 1.765,1.078 1.280,1.075 C1.068,1.074 0.898,0.917 0.877,0.714 C0.855,0.499 0.975,0.312 1.175,0.260 C1.223,0.248 1.274,0.247 1.324,0.247 C1.930,0.246 2.536,0.246 3.141,0.246 C3.405,0.247 3.537,0.348 3.601,0.602 C3.695,0.975 3.790,1.347 3.875,1.722 C3.901,1.840 3.952,1.873 4.070,1.873 C7.133,1.870 10.195,1.871 13.258,1.870 C13.359,1.870 13.458,1.874 13.546,1.935 C13.701,2.042 13.764,2.212 13.714,2.415 C13.537,3.141 13.357,3.866 13.178,4.592 ZM6.006,9.993 C6.457,9.994 6.812,10.359 6.810,10.818 C6.808,11.276 6.451,11.634 5.997,11.635 C5.543,11.635 5.188,11.276 5.188,10.816 C5.188,10.349 5.543,9.991 6.006,9.993 ZM10.917,9.993 C11.369,9.993 11.726,10.356 11.725,10.815 C11.724,11.272 11.367,11.634 10.914,11.635 C10.459,11.636 10.103,11.277 10.103,10.819 C10.103,10.348 10.453,9.993 10.917,9.993 Z"></path>
+												</svg>
+											</span>
+											<span class="txt">
+												Положить
+												в корзину
+											</span>
+												</a>
+											</div>
+
+										</div>
 									</div>
 								</div>
-								<b>
-									1 500 р.
-								</b>
-							</div>
-							<div class="item-i">
-								<div class="good-name">
-									<div class="svg-c">
-										<svg
-												xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink"
-												width="12px" height="11px">
-											<path fill-rule="evenodd"  fill="rgb(18, 18, 18)"
-												  d="M11.997,3.053 C11.916,3.058 11.836,3.067 11.755,3.067 C7.918,3.068 4.082,3.068 0.245,3.067 C0.164,3.067 0.083,3.058 0.003,3.053 C0.003,2.074 0.004,1.096 0.000,0.117 C-0.000,0.021 0.022,-0.000 0.115,0.000 C4.038,0.003 7.962,0.003 11.885,0.000 C11.978,-0.000 12.000,0.021 12.000,0.117 C11.996,1.096 11.997,2.074 11.997,3.053 ZM0.847,3.649 C4.282,3.649 7.717,3.649 11.152,3.649 C11.410,3.649 11.412,3.650 11.412,3.911 C11.412,6.186 11.412,8.461 11.412,10.736 C11.412,10.998 11.410,11.000 11.153,11.000 C9.436,11.000 7.718,11.000 6.000,11.000 C4.283,11.000 2.565,11.000 0.848,11.000 C0.590,11.000 0.588,10.998 0.588,10.737 C0.588,8.462 0.588,6.187 0.588,3.912 C0.588,3.650 0.590,3.649 0.847,3.649 ZM4.839,6.086 C5.232,6.097 5.625,6.089 6.018,6.088 C6.404,6.088 6.791,6.097 7.177,6.085 C7.527,6.075 7.789,5.804 7.781,5.485 C7.774,5.167 7.522,4.907 7.179,4.903 C6.394,4.893 5.608,4.894 4.822,4.903 C4.559,4.905 4.354,5.034 4.260,5.298 C4.119,5.693 4.396,6.075 4.839,6.086 Z"/>
-										</svg>
-									</div>
-									<div class="txt">
-										Сигнализация
+								<div class="same-i">
+									<div class="tab-content-c short-cart">
+										<div class="tab-content-i blackShild txtShild" cont="Hit!">
+											<a href="" class="title-h">
+										<span class="txt">
+											Pandora DX-90B
+										</span>
+											</a>
+											<a href="">
+												<div class="prev-c">
+													<div class="prev" style="background-image: url('img/box.png')">
+
+													</div>
+												</div>
+											</a>
+
+											<div class="price-c">
+												<button class="sq-btn sq-like ">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+													</svg>
+												</button>
+												<div class="price-txt">
+													<strong>12 000</strong> руб.
+												</div>
+												<button class="sq-btn sq-eq">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+													</svg>
+												</button>
+											</div>
+
+											<div class="cheep-c">
+												<img src="img/yandexMoney.jpg" alt="">
+												<p class="txt">
+													Купить за 9 850,45 Р/мес.
+												</p>
+											</div>
+
+											<div class="btn-c">
+												<a href="javascript:void(0)" class="btn-dark">
+													Подробнее
+												</a>
+												<a href="javascript:void(0)" class="btn-dark">
+											<span class="svg-c">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="12px">
+													<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M13.178,4.592 C12.963,5.461 12.749,6.330 12.533,7.198 C12.466,7.469 12.333,7.573 12.062,7.574 C10.971,7.574 9.881,7.574 8.790,7.574 C7.691,7.574 6.592,7.574 5.493,7.574 C5.321,7.574 5.319,7.575 5.359,7.740 C5.431,8.040 5.511,8.338 5.578,8.639 C5.602,8.747 5.651,8.777 5.757,8.777 C7.725,8.774 9.693,8.774 11.661,8.774 C11.699,8.774 11.736,8.774 11.774,8.774 C12.040,8.776 12.227,8.950 12.224,9.195 C12.222,9.432 12.035,9.604 11.776,9.604 C10.460,9.605 9.144,9.604 7.827,9.604 C7.013,9.605 6.198,9.605 5.383,9.605 C5.059,9.605 4.941,9.513 4.863,9.194 C4.269,6.783 3.676,4.372 3.083,1.961 C3.021,1.711 2.958,1.462 2.903,1.210 C2.881,1.112 2.840,1.072 2.734,1.074 C2.249,1.080 1.765,1.078 1.280,1.075 C1.068,1.074 0.898,0.917 0.877,0.714 C0.855,0.499 0.975,0.312 1.175,0.260 C1.223,0.248 1.274,0.247 1.324,0.247 C1.930,0.246 2.536,0.246 3.141,0.246 C3.405,0.247 3.537,0.348 3.601,0.602 C3.695,0.975 3.790,1.347 3.875,1.722 C3.901,1.840 3.952,1.873 4.070,1.873 C7.133,1.870 10.195,1.871 13.258,1.870 C13.359,1.870 13.458,1.874 13.546,1.935 C13.701,2.042 13.764,2.212 13.714,2.415 C13.537,3.141 13.357,3.866 13.178,4.592 ZM6.006,9.993 C6.457,9.994 6.812,10.359 6.810,10.818 C6.808,11.276 6.451,11.634 5.997,11.635 C5.543,11.635 5.188,11.276 5.188,10.816 C5.188,10.349 5.543,9.991 6.006,9.993 ZM10.917,9.993 C11.369,9.993 11.726,10.356 11.725,10.815 C11.724,11.272 11.367,11.634 10.914,11.635 C10.459,11.636 10.103,11.277 10.103,10.819 C10.103,10.348 10.453,9.993 10.917,9.993 Z"></path>
+												</svg>
+											</span>
+											<span class="txt">
+												Положить
+												в корзину
+											</span>
+												</a>
+											</div>
+
+										</div>
 									</div>
 								</div>
-								<b>
-									1 500 р.
-								</b>
-							</div>
-							<div class="item-i del-b">
-								<div class="good-name">
-									<div class="svg-c">
-										<svg
-												xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink"
-												width="15px" height="9px">
-											<path fill-rule="evenodd"  fill="rgb(18, 18, 18)"
-												  d="M14.847,7.315 C14.817,7.352 14.836,7.436 14.831,7.498 C14.818,7.656 14.746,7.754 14.608,7.758 C14.322,7.766 14.035,7.760 13.749,7.760 C13.667,6.813 12.857,6.302 12.206,6.346 C11.572,6.389 11.058,6.925 10.885,7.788 C10.538,7.788 10.189,7.788 9.826,7.788 C9.826,5.976 9.826,4.165 9.826,2.308 C10.037,2.346 10.239,2.364 10.431,2.422 C11.042,2.603 11.557,2.976 12.056,3.383 C12.636,3.857 13.233,4.308 13.813,4.782 C14.268,5.155 14.615,5.619 14.762,6.229 C14.769,6.259 14.777,6.302 14.797,6.313 C14.992,6.421 14.957,6.619 14.956,6.795 C14.956,6.973 14.974,7.159 14.847,7.315 ZM12.456,4.323 C12.413,4.237 12.351,4.160 12.289,4.087 C11.908,3.640 11.471,3.266 10.980,2.971 C10.757,2.838 10.515,2.739 10.274,2.646 C10.102,2.581 10.051,2.633 10.050,2.824 C10.049,3.362 10.053,3.901 10.048,4.439 C10.047,4.582 10.098,4.634 10.230,4.632 C10.580,4.627 10.931,4.631 11.281,4.631 L11.281,4.630 C11.622,4.630 11.962,4.634 12.303,4.627 C12.372,4.625 12.477,4.599 12.500,4.550 C12.526,4.494 12.489,4.392 12.456,4.323 ZM9.456,7.691 C8.083,7.688 6.710,7.689 5.337,7.688 C5.318,7.688 5.299,7.681 5.272,7.675 C5.181,6.900 4.545,6.381 3.955,6.353 C3.237,6.320 2.649,6.799 2.479,7.548 C2.456,7.650 2.424,7.693 2.317,7.691 C1.767,7.685 1.216,7.689 0.666,7.689 C0.457,7.689 0.372,7.629 0.365,7.418 C0.352,6.970 0.361,6.521 0.361,6.060 C3.431,6.060 6.491,6.060 9.560,6.060 C9.565,6.102 9.573,6.142 9.573,6.183 C9.574,6.638 9.572,7.093 9.575,7.548 C9.576,7.643 9.558,7.691 9.456,7.691 ZM9.564,5.786 C9.319,5.786 9.086,5.786 8.853,5.786 C6.013,5.786 3.173,5.785 0.334,5.785 C0.065,5.785 -0.000,5.715 -0.000,5.424 C-0.000,3.733 -0.000,2.043 -0.000,0.352 C-0.000,0.070 0.066,-0.002 0.325,-0.002 C3.282,-0.002 6.238,-0.002 9.195,-0.001 C9.224,-0.001 9.254,-0.002 9.283,-0.001 C9.498,0.004 9.570,0.079 9.571,0.314 C9.573,0.817 9.572,1.319 9.572,1.822 C9.572,3.088 9.573,4.355 9.572,5.621 C9.572,5.672 9.567,5.723 9.564,5.786 ZM3.855,6.737 C4.440,6.735 4.911,7.241 4.910,7.874 C4.909,8.503 4.450,9.000 3.866,9.001 C3.281,9.003 2.809,8.506 2.806,7.886 C2.802,7.257 3.275,6.739 3.855,6.737 ZM3.861,8.638 C4.255,8.637 4.570,8.295 4.569,7.868 C4.569,7.444 4.249,7.104 3.853,7.106 C3.470,7.109 3.151,7.454 3.150,7.868 C3.148,8.292 3.469,8.639 3.861,8.638 ZM3.870,7.302 C4.158,7.307 4.404,7.570 4.403,7.873 C4.402,8.189 4.155,8.443 3.853,8.438 C3.553,8.433 3.325,8.188 3.327,7.871 C3.328,7.550 3.570,7.297 3.870,7.302 ZM12.325,6.737 C12.900,6.743 13.378,7.258 13.376,7.871 C13.375,8.498 12.899,9.005 12.313,9.003 C11.735,9.000 11.262,8.492 11.263,7.873 C11.263,7.250 11.748,6.732 12.325,6.737 ZM12.327,8.640 C12.712,8.632 13.032,8.286 13.034,7.875 C13.036,7.458 12.708,7.106 12.318,7.107 C11.927,7.108 11.603,7.458 11.604,7.877 C11.606,8.293 11.942,8.648 12.327,8.640 ZM12.328,7.302 C12.622,7.309 12.858,7.565 12.856,7.874 C12.854,8.194 12.613,8.443 12.309,8.438 C12.014,8.434 11.779,8.182 11.780,7.869 C11.782,7.553 12.031,7.295 12.328,7.302 Z"/>
-										</svg>
-									</div>
-									<div class="txt">
-										Доставка
+								<div class="same-i">
+									<div class="tab-content-c short-cart">
+										<div class="tab-content-i blackShild txtShild" cont="Hit!">
+											<a href="" class="title-h">
+										<span class="txt">
+											Pandora DX-90B
+										</span>
+											</a>
+											<a href="">
+												<div class="prev-c">
+													<div class="prev" style="background-image: url('img/box.png')">
+
+													</div>
+												</div>
+											</a>
+
+											<div class="price-c">
+												<button class="sq-btn sq-like ">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+													</svg>
+												</button>
+												<div class="price-txt">
+													<strong>12 000</strong> руб.
+												</div>
+												<button class="sq-btn sq-eq">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+													</svg>
+												</button>
+											</div>
+
+											<div class="cheep-c">
+												<img src="img/yandexMoney.jpg" alt="">
+												<p class="txt">
+													Купить за 9 850,45 Р/мес.
+												</p>
+											</div>
+
+											<div class="btn-c">
+												<a href="javascript:void(0)" class="btn-dark">
+													Подробнее
+												</a>
+												<a href="javascript:void(0)" class="btn-dark">
+											<span class="svg-c">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="12px">
+													<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M13.178,4.592 C12.963,5.461 12.749,6.330 12.533,7.198 C12.466,7.469 12.333,7.573 12.062,7.574 C10.971,7.574 9.881,7.574 8.790,7.574 C7.691,7.574 6.592,7.574 5.493,7.574 C5.321,7.574 5.319,7.575 5.359,7.740 C5.431,8.040 5.511,8.338 5.578,8.639 C5.602,8.747 5.651,8.777 5.757,8.777 C7.725,8.774 9.693,8.774 11.661,8.774 C11.699,8.774 11.736,8.774 11.774,8.774 C12.040,8.776 12.227,8.950 12.224,9.195 C12.222,9.432 12.035,9.604 11.776,9.604 C10.460,9.605 9.144,9.604 7.827,9.604 C7.013,9.605 6.198,9.605 5.383,9.605 C5.059,9.605 4.941,9.513 4.863,9.194 C4.269,6.783 3.676,4.372 3.083,1.961 C3.021,1.711 2.958,1.462 2.903,1.210 C2.881,1.112 2.840,1.072 2.734,1.074 C2.249,1.080 1.765,1.078 1.280,1.075 C1.068,1.074 0.898,0.917 0.877,0.714 C0.855,0.499 0.975,0.312 1.175,0.260 C1.223,0.248 1.274,0.247 1.324,0.247 C1.930,0.246 2.536,0.246 3.141,0.246 C3.405,0.247 3.537,0.348 3.601,0.602 C3.695,0.975 3.790,1.347 3.875,1.722 C3.901,1.840 3.952,1.873 4.070,1.873 C7.133,1.870 10.195,1.871 13.258,1.870 C13.359,1.870 13.458,1.874 13.546,1.935 C13.701,2.042 13.764,2.212 13.714,2.415 C13.537,3.141 13.357,3.866 13.178,4.592 ZM6.006,9.993 C6.457,9.994 6.812,10.359 6.810,10.818 C6.808,11.276 6.451,11.634 5.997,11.635 C5.543,11.635 5.188,11.276 5.188,10.816 C5.188,10.349 5.543,9.991 6.006,9.993 ZM10.917,9.993 C11.369,9.993 11.726,10.356 11.725,10.815 C11.724,11.272 11.367,11.634 10.914,11.635 C10.459,11.636 10.103,11.277 10.103,10.819 C10.103,10.348 10.453,9.993 10.917,9.993 Z"></path>
+												</svg>
+											</span>
+											<span class="txt">
+												Положить
+												в корзину
+											</span>
+												</a>
+											</div>
+
+										</div>
 									</div>
 								</div>
-								<b>
-									500 р.
-								</b>
+								<div class="same-i">
+									<div class="tab-content-c short-cart">
+										<div class="tab-content-i blackShild txtShild" cont="Hit!">
+											<a href="" class="title-h">
+										<span class="txt">
+											Pandora DX-90B
+										</span>
+											</a>
+											<a href="">
+												<div class="prev-c">
+													<div class="prev" style="background-image: url('img/box.png')">
+
+													</div>
+												</div>
+											</a>
+
+											<div class="price-c">
+												<button class="sq-btn sq-like ">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+													</svg>
+												</button>
+												<div class="price-txt">
+													<strong>12 000</strong> руб.
+												</div>
+												<button class="sq-btn sq-eq">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+													</svg>
+												</button>
+											</div>
+
+											<div class="cheep-c">
+												<img src="img/yandexMoney.jpg" alt="">
+												<p class="txt">
+													Купить за 9 850,45 Р/мес.
+												</p>
+											</div>
+
+											<div class="btn-c">
+												<a href="javascript:void(0)" class="btn-dark">
+													Подробнее
+												</a>
+												<a href="javascript:void(0)" class="btn-dark">
+											<span class="svg-c">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="12px">
+													<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M13.178,4.592 C12.963,5.461 12.749,6.330 12.533,7.198 C12.466,7.469 12.333,7.573 12.062,7.574 C10.971,7.574 9.881,7.574 8.790,7.574 C7.691,7.574 6.592,7.574 5.493,7.574 C5.321,7.574 5.319,7.575 5.359,7.740 C5.431,8.040 5.511,8.338 5.578,8.639 C5.602,8.747 5.651,8.777 5.757,8.777 C7.725,8.774 9.693,8.774 11.661,8.774 C11.699,8.774 11.736,8.774 11.774,8.774 C12.040,8.776 12.227,8.950 12.224,9.195 C12.222,9.432 12.035,9.604 11.776,9.604 C10.460,9.605 9.144,9.604 7.827,9.604 C7.013,9.605 6.198,9.605 5.383,9.605 C5.059,9.605 4.941,9.513 4.863,9.194 C4.269,6.783 3.676,4.372 3.083,1.961 C3.021,1.711 2.958,1.462 2.903,1.210 C2.881,1.112 2.840,1.072 2.734,1.074 C2.249,1.080 1.765,1.078 1.280,1.075 C1.068,1.074 0.898,0.917 0.877,0.714 C0.855,0.499 0.975,0.312 1.175,0.260 C1.223,0.248 1.274,0.247 1.324,0.247 C1.930,0.246 2.536,0.246 3.141,0.246 C3.405,0.247 3.537,0.348 3.601,0.602 C3.695,0.975 3.790,1.347 3.875,1.722 C3.901,1.840 3.952,1.873 4.070,1.873 C7.133,1.870 10.195,1.871 13.258,1.870 C13.359,1.870 13.458,1.874 13.546,1.935 C13.701,2.042 13.764,2.212 13.714,2.415 C13.537,3.141 13.357,3.866 13.178,4.592 ZM6.006,9.993 C6.457,9.994 6.812,10.359 6.810,10.818 C6.808,11.276 6.451,11.634 5.997,11.635 C5.543,11.635 5.188,11.276 5.188,10.816 C5.188,10.349 5.543,9.991 6.006,9.993 ZM10.917,9.993 C11.369,9.993 11.726,10.356 11.725,10.815 C11.724,11.272 11.367,11.634 10.914,11.635 C10.459,11.636 10.103,11.277 10.103,10.819 C10.103,10.348 10.453,9.993 10.917,9.993 Z"></path>
+												</svg>
+											</span>
+											<span class="txt">
+												Положить
+												в корзину
+											</span>
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="same-i">
+									<div class="tab-content-c short-cart">
+										<div class="tab-content-i blackShild txtShild" cont="Hit!">
+											<a href="" class="title-h">
+										<span class="txt">
+											Pandora DX-90B
+										</span>
+											</a>
+											<a href="">
+												<div class="prev-c">
+													<div class="prev" style="background-image: url('img/box.png')">
+
+													</div>
+												</div>
+											</a>
+
+											<div class="price-c">
+												<button class="sq-btn sq-like ">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17px" height="16px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M16.280,3.168 C14.824,-0.700 8.437,0.088 8.437,5.564 C8.437,0.088 2.050,-0.700 0.594,3.168 C-2.048,10.184 8.437,15.832 8.437,15.832 C8.437,15.832 18.922,10.184 16.280,3.168 Z"></path>
+													</svg>
+												</button>
+												<div class="price-txt">
+													<strong>12 000</strong> руб.
+												</div>
+												<button class="sq-btn sq-eq">
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px">
+														<path fill-rule="evenodd" fill="rgb(198, 198, 198)" d="M18.012,9.721 C17.939,10.414 17.600,10.964 17.027,11.367 C15.847,12.198 14.236,11.977 13.344,10.858 C13.076,10.522 12.924,10.132 12.886,9.699 C12.871,9.530 12.923,9.482 13.089,9.483 C13.875,9.488 14.661,9.485 15.447,9.485 C16.227,9.485 17.006,9.484 17.786,9.486 C18.008,9.486 18.035,9.503 18.012,9.721 ZM17.369,9.095 C17.152,9.158 17.032,9.028 16.918,8.819 C16.473,8.000 16.008,7.191 15.550,6.379 C15.524,6.333 15.508,6.264 15.449,6.264 C15.387,6.265 15.379,6.338 15.353,6.383 C14.878,7.226 14.402,8.070 13.932,8.916 C13.860,9.046 13.772,9.116 13.617,9.097 C13.558,9.090 13.496,9.095 13.436,9.095 C13.130,9.094 13.126,9.082 13.271,8.825 C13.886,7.740 14.500,6.653 15.112,5.567 C15.262,5.301 15.462,5.223 15.643,5.378 C15.709,5.435 15.759,5.514 15.803,5.591 C16.065,6.050 16.324,6.511 16.583,6.971 C16.938,7.603 17.292,8.236 17.647,8.868 C17.772,9.091 17.771,9.093 17.516,9.095 C17.480,9.095 17.444,9.095 17.369,9.095 ZM15.591,4.913 C15.236,4.995 14.836,4.832 14.692,4.506 C14.566,4.219 14.344,4.081 14.057,4.006 C13.281,3.802 12.504,3.599 11.728,3.396 C9.452,2.800 7.176,2.204 4.900,1.608 C4.626,1.536 4.352,1.464 4.077,1.394 C3.796,1.323 3.539,1.337 3.286,1.513 C3.017,1.701 2.712,1.697 2.432,1.523 C2.142,1.343 2.000,1.074 2.051,0.737 C2.101,0.412 2.293,0.187 2.621,0.090 C2.838,0.027 3.054,0.078 3.267,0.113 C4.494,0.317 5.719,0.527 6.946,0.728 C7.302,0.786 7.612,0.745 7.913,0.478 C8.942,-0.439 10.787,0.048 11.213,1.341 C11.330,1.696 11.550,1.900 11.887,2.022 C12.833,2.364 13.779,2.707 14.726,3.050 C15.043,3.165 15.362,3.275 15.678,3.393 C16.023,3.521 16.209,3.788 16.208,4.141 C16.208,4.529 15.972,4.824 15.591,4.913 ZM9.397,0.867 C9.033,0.864 8.724,1.173 8.725,1.539 C8.725,1.906 9.016,2.193 9.390,2.197 C9.769,2.200 10.063,1.908 10.062,1.530 C10.061,1.171 9.758,0.870 9.397,0.867 ZM2.577,2.031 C2.746,2.024 2.820,2.138 2.890,2.261 C3.527,3.390 4.164,4.518 4.801,5.647 C4.883,5.792 4.867,5.822 4.704,5.828 C4.643,5.830 4.583,5.828 4.475,5.828 C4.266,5.885 4.148,5.751 4.035,5.542 C3.587,4.717 3.117,3.903 2.659,3.083 C2.587,2.955 2.547,2.976 2.484,3.088 C2.017,3.923 1.541,4.754 1.081,5.593 C0.985,5.769 0.875,5.838 0.671,5.831 C0.253,5.817 0.250,5.826 0.446,5.475 C1.048,4.402 1.654,3.330 2.256,2.257 C2.328,2.130 2.420,2.038 2.577,2.031 ZM2.588,6.217 C3.361,6.217 4.135,6.221 4.908,6.214 C5.081,6.212 5.150,6.265 5.134,6.437 C5.075,7.109 4.746,7.635 4.215,8.043 C3.281,8.762 1.926,8.783 0.976,8.082 C0.467,7.707 0.127,7.213 0.026,6.583 C0.018,6.530 0.017,6.477 0.010,6.424 C-0.010,6.272 0.054,6.214 0.214,6.215 C0.945,6.220 1.676,6.217 2.407,6.217 C2.467,6.217 2.528,6.217 2.588,6.217 ZM5.748,11.982 C6.258,11.812 6.784,11.829 7.309,11.827 C7.370,11.827 7.430,11.826 7.491,11.829 C7.614,11.837 7.655,11.782 7.665,11.663 C7.768,10.420 7.878,9.178 7.983,7.936 C8.061,7.012 8.132,6.087 8.209,5.162 C8.266,4.485 8.330,3.808 8.387,3.131 C8.395,3.024 8.441,2.999 8.539,3.025 C8.895,3.119 9.251,3.213 9.608,3.304 C9.703,3.329 9.745,3.383 9.753,3.479 C9.797,3.986 9.846,4.491 9.890,4.998 C9.949,5.663 10.006,6.328 10.062,6.993 C10.115,7.623 10.166,8.253 10.218,8.883 C10.293,9.784 10.367,10.685 10.445,11.586 C10.467,11.830 10.476,11.829 10.739,11.830 C11.216,11.831 11.693,11.808 12.164,11.924 C13.082,12.152 13.702,12.845 13.802,13.767 C13.823,13.964 13.796,13.995 13.590,13.995 C12.079,13.995 10.567,13.995 9.055,13.995 C7.556,13.995 6.056,13.995 4.557,13.995 C4.314,13.995 4.314,13.994 4.323,13.760 C4.354,12.984 4.946,12.251 5.748,11.982 Z"></path>
+													</svg>
+												</button>
+											</div>
+
+											<div class="cheep-c">
+												<img src="img/yandexMoney.jpg" alt="">
+												<p class="txt">
+													Купить за 9 850,45 Р/мес.
+												</p>
+											</div>
+
+											<div class="btn-c">
+												<a href="javascript:void(0)" class="btn-dark">
+													Подробнее
+												</a>
+												<a href="javascript:void(0)" class="btn-dark">
+											<span class="svg-c">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14px" height="12px">
+													<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M13.178,4.592 C12.963,5.461 12.749,6.330 12.533,7.198 C12.466,7.469 12.333,7.573 12.062,7.574 C10.971,7.574 9.881,7.574 8.790,7.574 C7.691,7.574 6.592,7.574 5.493,7.574 C5.321,7.574 5.319,7.575 5.359,7.740 C5.431,8.040 5.511,8.338 5.578,8.639 C5.602,8.747 5.651,8.777 5.757,8.777 C7.725,8.774 9.693,8.774 11.661,8.774 C11.699,8.774 11.736,8.774 11.774,8.774 C12.040,8.776 12.227,8.950 12.224,9.195 C12.222,9.432 12.035,9.604 11.776,9.604 C10.460,9.605 9.144,9.604 7.827,9.604 C7.013,9.605 6.198,9.605 5.383,9.605 C5.059,9.605 4.941,9.513 4.863,9.194 C4.269,6.783 3.676,4.372 3.083,1.961 C3.021,1.711 2.958,1.462 2.903,1.210 C2.881,1.112 2.840,1.072 2.734,1.074 C2.249,1.080 1.765,1.078 1.280,1.075 C1.068,1.074 0.898,0.917 0.877,0.714 C0.855,0.499 0.975,0.312 1.175,0.260 C1.223,0.248 1.274,0.247 1.324,0.247 C1.930,0.246 2.536,0.246 3.141,0.246 C3.405,0.247 3.537,0.348 3.601,0.602 C3.695,0.975 3.790,1.347 3.875,1.722 C3.901,1.840 3.952,1.873 4.070,1.873 C7.133,1.870 10.195,1.871 13.258,1.870 C13.359,1.870 13.458,1.874 13.546,1.935 C13.701,2.042 13.764,2.212 13.714,2.415 C13.537,3.141 13.357,3.866 13.178,4.592 ZM6.006,9.993 C6.457,9.994 6.812,10.359 6.810,10.818 C6.808,11.276 6.451,11.634 5.997,11.635 C5.543,11.635 5.188,11.276 5.188,10.816 C5.188,10.349 5.543,9.991 6.006,9.993 ZM10.917,9.993 C11.369,9.993 11.726,10.356 11.725,10.815 C11.724,11.272 11.367,11.634 10.914,11.635 C10.459,11.636 10.103,11.277 10.103,10.819 C10.103,10.348 10.453,9.993 10.917,9.993 Z"></path>
+												</svg>
+											</span>
+											<span class="txt">
+												Положить
+												в корзину
+											</span>
+												</a>
+											</div>
+
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="title-b">
-						<div class="txt">
-							Итого:
-						</div>
-						<div class="txt">
-							5 000 р.
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 </div>
@@ -863,186 +940,7 @@
 	</div>
 </div>
 
-
 <!--Modal for all pages start-->
-<div data-fancybox="" data-src="#citySelect">
-	<div id="citySelect" class="" style="display: none">
-		<div class="city-popup">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="h2">
-							Выберите свой город
-						</div>
-					</div>
-					<div class="col-12">
-						<div class="h-city">
-							<div class="group-i">
-								<input type="text" onkeyup="filterCity(event)" class="js-selectcity" placeholder="Введите название своего города">
-								<button class="btn-clear" onclick="clearFindCityInput();cityListInit();">
-									<svg
-											xmlns="http://www.w3.org/2000/svg"
-											xmlns:xlink="http://www.w3.org/1999/xlink"
-											width="11px" height="11px">
-										<path fill-rule="evenodd"  fill="rgb(190, 189, 189)"
-											  d="M10.996,9.656 L9.652,10.999 L5.499,6.846 L1.346,10.999 L0.003,9.656 L4.156,5.503 L0.003,1.350 L1.346,0.006 L5.499,4.159 L9.652,0.006 L10.996,1.350 L6.843,5.503 L10.996,9.656 Z"/>
-									</svg>
-								</button>
-							</div>
-							<div class="tabs-city">
-								<div class="tab-i active">
-									По алфавиту
-								</div>
-								<div class="tab-i">
-									По региону
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12">
-						<div class="row city-tab-i js-char-bb active">
-							<div class="col-12">
-								<div class="js-scroll-city">
-									<div class="char-cc">
-										<div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
-											<div class="single-char">
-												А
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Б
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-SingleChar = "а" data-citylist="Екатеринбург">
-											<div class="single-char">
-												Е
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Б
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
-											<div class="single-char">
-												А
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Б
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row city-tab-i js-char-bb">
-							<div class="col-12">
-								<div class="js-scroll-city">
-									<div class="char-cc">
-										<div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-										<div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
-											<div class="single-char">
-												Пермский край
-											</div>
-											<div class="city-list">
-												<ul>
-
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
 <div data-fancybox="" data-src="#consult">
 	<div id="consult" class="white-popup" style="display: none">
 		<div class="container">
@@ -1091,34 +989,22 @@
 <link rel="stylesheet" href="css/custom.css">
 <script src="js/scripts.min.js"></script>
 <script src="js/common.js"></script>
-
-<script src="js/vue/vue.js"></script>
-<script src="js/vue/modelorder.js"></script>
-
-<!--For mask input START-->
-<script src="js/vue/v-mask-master/dist/v-mask.min.js"></script>
-<script>
-	// As a plugin
-	Vue.use(VueMask.VueMaskPlugin);
-
-	// As a directive
-	Vue.directive('mask', VueMask.VueMaskDirective);
-</script>
-<!--For mask input END-->
-
 <!--For all pages END-->
 <!--For this pages START-->
+
 <!--For this pages END-->
 
 <script>
 	/*For this page START*/
 
-
+	sameSliderInit();
 
 	/*For this page END*/
 
 	/*For all pages START*/
-
+	$(function() {
+		$('input[type="tel"]').mask("+7 (999) 999-9999");
+	});
 	/*For all pages END*/
 </script>
 
