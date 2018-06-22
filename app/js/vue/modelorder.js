@@ -297,9 +297,7 @@ $(function() {
         },
         mounted: function () {
             var varthis = this;
-
             this.initStyler();
-
             //Обработка нажатия на стилизованные чекбоксы/радиобатоны
             $(document).on('click', '.jq-radio.vue-input', function () {
                 var elem = $(this).children('.vue-input');
@@ -316,6 +314,14 @@ $(function() {
             //     var selectedCity = $(this).val().toUpperCase();
             //     varthis.changeDelivery(selectedCity);
             // });
+
+            $('.js-setCity').bind("DOMSubtreeModified",function(){
+                var selectedCity = $(this).text().toUpperCase();
+                varthis.changeDelivery(selectedCity);
+            });
+
+
+
 
             $('.transportAddress').change(function () {
                 if($(this).val().toUpperCase() != ''){
