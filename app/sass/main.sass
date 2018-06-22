@@ -2705,7 +2705,7 @@ input
 		&.contactInfo-step
 			margin-top: 18px
 		.selfAddr
-			padding-top: 13px
+			padding-top: 0px
 		.col-12
 			animation: fadeEffect .3s ease
 		.btn-c
@@ -2764,6 +2764,8 @@ input
 			margin-top: 15px
 			display: flex
 			align-items: center
+			&:not(.fiz-group):first-child
+				margin-top: 0px
 		.group-type
 			display: flex
 			label
@@ -2816,7 +2818,7 @@ input
 			justify-content: space-between
 			margin-top: 15px
 	.my-select
-		margin-top: 15px
+		margin-top: 0px
 .jq-file__browse
 	background: #dbdbdb
 	border-radius: 2px
@@ -3366,6 +3368,8 @@ input
 			&:after
 				color: lighten($dark, 20)
 				background: transparent
+.notOficeTitle
+	margin-bottom: 0px!important
 /*Project end*/
 
 

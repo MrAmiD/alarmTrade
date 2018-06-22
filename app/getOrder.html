@@ -269,23 +269,9 @@
                             Ваш город:
                         </div>
                         <div class="txt-accent">
-                            <select class="vue-select" name="city-select2" id="city-select2">
-                                <option value="Екатеринбург">
-                                    Екатеринбург
-                                </option>
-                                <option value="Пермь">
-                                    Пермь
-                                </option>
-                                <option value="Казань">
-                                    Казань
-                                </option>
-                                <option value="Питер">
-                                    Питер
-                                </option>
-                                <option value="Москва">
-                                    Москва
-                                </option>
-                            </select>
+                            <a href="javascript:void(0);" class="js-setCity" onclick="$('#citySelect').click();">
+                                Екатеринбург
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -323,7 +309,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="group-type">
-                                        <div class="i-group">
+                                        <div class="i-group fiz-group">
                                             <input class="vue-input" value="fizik" data-model="clientType" v-model="orderInfo.clientType" type="radio" name="clientType" checked id="fizik">
                                             <label for="fizik">
                                                 Физическое лицо
@@ -381,71 +367,17 @@
                         </div>
                         <div v-show="stepType == 'deliveryInfo'" class="step-i delivery-step">
                             <div class="row">
-                                <div v-show="orderInfo.city.toUpperCase() == selDelCity.toUpperCase()" class="col-12 selfDelivery-s selCityDel">
+                                <div  class="col-12 selfDelivery-s selCityDel">
                                     <div class="row">
-                                        <div class="col-12 col-md-6">
-                                            <div class="h3">
+                                        <!--Для Всех городов, кроме selDelCity, доставка транспортной компанией-->
+
+                                        <div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12">
+                                            <div class="h3 notOficeTitle">
                                                 Выберите способ доставки:
                                             </div>
-                                            <div class="group-inpt">
-                                                <div class="i-group">
-
-                                                    <input class="vue-input" value="Доставка курьером" data-model="deliveryType" v-model="orderInfo.deliveryType" type="radio" name="delivery" id="taxDel">
-                                                    <label for="taxDel">
-                                                        Доставка курьером (бесплатно) с 10:00 до 21:00
-                                                    </label>
-                                                </div>
-                                                <div class="i-group">
-                                                    <input class="vue-input" type="radio" name="delivery"  value="Самовывоз" data-model="deliveryType" v-model="orderInfo.deliveryType" id="selfDel">
-                                                    <label for="selfDel">
-                                                        Самовывоз (бесплатно) с 10:00 до 19:00
-                                                    </label>
-                                                </div>
-                                            </div>
                                         </div>
-                                        <div v-show="orderInfo.deliveryType == 'Доставка курьером'" class="col-12 col-md-6">
-                                            <div class="h3">
-                                                Адрес доставки:
-                                            </div>
-                                            <div class="address-cc">
-                                                <input v-model="orderInfo.deliveryAdress.street" class="vue-input" type="text" name="street" id="street" placeholder="Улица">
-                                            </div>
-                                            <div class="address-c">
-                                                <input v-model="orderInfo.deliveryAdress.lit" class="vue-input" type="text" name="lit" id="lit" placeholder="Корпус">
-                                                <input v-model="orderInfo.deliveryAdress.house" class="vue-input" type="text" name="house" id="house" placeholder="Дом">
-                                                <input v-model="orderInfo.deliveryAdress.apartament" class="vue-input" type="text" name="apartament" id="apartament" placeholder="Квартира">
-                                            </div>
-                                        </div>
-                                        <div v-show="orderInfo.deliveryType == 'Самовывоз'" class="col-12 col-md-6">
-                                            <div class="h3">
-                                                Адрес Самовывоза:
-                                            </div>
-                                            <p class="selfAddr">
-                                                {{orderInfo.addressCompany}}
-                                            </p>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="h3">
-                                                Добавить комментарий:
-                                            </div>
-                                            <textarea v-model="orderInfo.commentClient" name="msg-cc" id="msg-cc" cols="30" rows="10"></textarea>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="h3">
-                                                Выберите дату:
-                                            </div>
-                                            <input v-model="orderInfo.deliveryDate" placeholder="ДД/ММ/ГГГГ" type="text" class='datepicker-here vue-input'>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Для Всех городов, кроме Перми, доставка транспортной компанией-->
-                                <div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12 transDelivery-s selCityDel">
-                                    <div class="h3">
-                                        Выберите способ доставки:
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6">
-                                            <div class="h4" :class="{'errorTxt': deliveryCheckMode == true && !orderInfo.transportCompanyInfo.companyName }">
+                                        <div v-show="orderInfo.city.toUpperCase() != selDelCity.toUpperCase()" class="col-12 col-md-6">
+                                            <div class="h3" :class="{'errorTxt': deliveryCheckMode == true && !orderInfo.transportCompanyInfo.companyName }">
                                                 Транспортная компания
                                             </div>
                                             <div class="group-inpt transport-c">
@@ -478,8 +410,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <div v-show="orderInfo.transportCompanyInfo.companyName" class="h4">
+                                        <div v-show="showDelPoints" class="col-12 col-md-6" >
+                                            <div v-show="orderInfo.transportCompanyInfo.companyName" class="h3">
                                                 Адрес самовывоза:
                                             </div>
                                             <div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка EMS'}" class="group-inpt transport-c">
@@ -497,7 +429,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div v-show="orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Курьерская доставка СДЭК'}" class="group-inpt transport-c">
                                                 <div class="my-select vue-select">
                                                     <select class="vue-select transportAddress" name="transportAddress" id="transportAddress2">
@@ -513,7 +444,6 @@
                                                     </select>
                                                 </div>
                                             </div>
-
                                             <div v-show="orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'" :class="{ active: orderInfo.transportCompanyInfo.companyName == 'Пункт выдачи СДЭК'}" class="group-inpt transport-c">
                                                 <div class="my-select vue-select">
                                                     <select class="vue-select transportAddress" name="transportAddress" id="transportAddress3">
@@ -529,10 +459,90 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                        </div>
 
+
+                                        <!--Выберите способ доставки:-->
+                                        <div v-show="showChoiceDelOfice" class="col-12 col-md-6">
+                                            <div class="h3">
+                                                Выберите способ доставки:
+                                            </div>
+                                            <div class="group-inpt">
+                                                <div class="i-group">
+                                                    <input class="vue-input" checked value="Доставка курьером" data-model="deliveryType" v-model="orderInfo.deliveryType" type="radio" name="delivery" id="taxDel">
+                                                    <label for="taxDel">
+                                                        Доставка курьером (бесплатно) с 10:00 до 21:00
+                                                    </label>
+                                                </div>
+                                                <div class="i-group">
+                                                    <input class="vue-input" type="radio" name="delivery"  value="Самовывоз" data-model="deliveryType" v-model="orderInfo.deliveryType" id="selfDel">
+                                                    <label for="selfDel">
+                                                        Самовывоз (бесплатно) с 10:00 до 19:00
+                                                    </label>
+                                                </div>
+
+                                                <!--<div class="i-group" v-show="selDelCity !== orderInfo.city">-->
+                                                <!--<input class="vue-input" value="Транспортная компания" data-model="deliveryType" v-model="orderInfo.deliveryType" type="radio" name="delivery" id="transDel">-->
+                                                <!--<label for="transDel">-->
+                                                <!--Транспортная компания-->
+                                                <!--</label>-->
+                                                <!--</div>-->
+
+                                            </div>
+                                        </div>
+                                        <!--Адрес доставки:-->
+                                        <div v-show="showInputsSelfDelivery && !showSelfOfice && !showDelPoints" class="col-12 col-md-6">
+                                            <div class="h3">
+                                                Адрес доставки:
+                                            </div>
+                                            <div class="address-cc">
+                                                <input v-model="orderInfo.deliveryAdress.street" class="vue-input" type="text" name="street" id="street" placeholder="Улица">
+                                            </div>
+                                            <div class="address-c">
+                                                <input v-model="orderInfo.deliveryAdress.lit" class="vue-input" type="text" name="lit" id="lit" placeholder="Корпус">
+                                                <input v-model="orderInfo.deliveryAdress.house" class="vue-input" type="text" name="house" id="house" placeholder="Дом">
+                                                <input v-model="orderInfo.deliveryAdress.apartament" class="vue-input" type="text" name="apartament" id="apartament" placeholder="Квартира">
+                                            </div>
+                                        </div>
+                                        <!--Адрес Самовывоза:-->
+                                        <div v-show="showSelfOfice" class="col-12 col-md-6">
+                                            <div class="h3">
+                                                Адрес Самовывоза:
+                                            </div>
+                                            <p class="selfAddr">
+                                                {{orderInfo.addressCompany}}
+                                            </p>
+                                        </div>
+                                        <!--
+                                            1) Выберите способ доставки (ёбург)
+                                            2) Адрес Самовывоза (Ёбург)
+                                            3) Транспортная компания
+                                            4) Адрес доставки
+                                            5) Добавить комментарий
+                                            6) Выберите дату
+                                            7) Адрес самовывоза: (пункты выдачи)
+                                        -->
+                                        <!--Для транспортной компании start-->
+
+                                        <!--todo: при переключении способа доставки для Еката, если самовывоз, то this.orderInfo.deliveryHouse = false -->
+                                        <!--todo: Отработать всю логику блока "Способ доставки" до конца-->
+
+                                        <!--Для транспортной компании end-->
+                                        <div v-show="showComment" class="col-12 col-md-6">
+                                            <div class="h3">
+                                                Добавить комментарий:
+                                            </div>
+                                            <textarea v-model="orderInfo.commentClient" name="msg-cc" id="msg-cc" cols="30" rows="10"></textarea>
+                                        </div>
+                                        <div v-show="showDate" class="col-12 col-md-6">
+                                            <div class="h3">
+                                                Выберите дату:
+                                            </div>
+                                            <input v-model="orderInfo.deliveryDate" placeholder="ДД/ММ/ГГГГ" type="text" class='datepicker-here vue-input'>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -551,7 +561,6 @@
                             <div class="h3">
                                 Выберите способ оплаты:
                             </div>
-
                             <div class="row payment-type-r">
                                 <div class="col-12 col-md-6 col-lg-4 payment-type-c">
                                     <div class="payment-type-i" :class="{active: orderInfo.paymentType == 'Картой'}"  @click="setPaymentType('Картой')">
@@ -633,24 +642,27 @@
                             <p>
                                 <br>
                                 {{orderInfo.city}} <br>
-                                {{orderInfo.deliveryType}}
-                                <template v-if="orderInfo.deliveryType == 'Самовывоз' && orderInfo.city != selDelCity">
-                                    {{orderInfo.deliveryDate}},
-                                    ул. {{orderInfo.deliveryAdress.street}},
-                                    лит. - {{orderInfo.deliveryAdress.lit}},
-                                    д. {{orderInfo.deliveryAdress.house}},
-                                    кв. {{orderInfo.deliveryAdress.apartament}}
+
+                                <template v-if="!showDelPoints">
+                                    {{orderInfo.deliveryType}} <br>
                                 </template>
 
-                                <template v-if="orderInfo.deliveryType != 'Самовывоз' && orderInfo.city != selDelCity">
+
+                                <template v-if="showSelfOfice">
+                                    {{orderInfo.deliveryDate}},
+                                    {{orderInfo.addressCompany}}
+                                </template>
+
+                                <template v-if="showTransCompany && showDelPoints">
                                     Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
                                     Адрес самовывоза: {{orderInfo.transportCompanyInfo.address}}
                                 </template>
 
-                                <template v-if="orderInfo.city == selDelCity && orderInfo.deliveryType == 'Самовывоз'">
-                                    Адрес самовывоза: {{orderInfo.addressCompany}} <br>
+                                <template v-if="showTransCompany && !showDelPoints">
+                                    Тр. компания: {{orderInfo.transportCompanyInfo.companyName}} <br>
                                 </template>
-                                <template v-if="orderInfo.city == selDelCity && orderInfo.deliveryType != 'Самовывоз'">
+
+                                <template v-if="showInputsSelfDelivery">
                                     {{orderInfo.deliveryDate}},
                                     ул. {{orderInfo.deliveryAdress.street}},
                                     лит. - {{orderInfo.deliveryAdress.lit}},
@@ -687,39 +699,6 @@
             </div>
             <div class="col-12 col-lg-3 basket-order-cr">
                 <div class="bascet-list">
-                    <div class="city-select" v-show="stepType != 'getOrder'">
-                        <div class="svg-c">
-                            <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="9px" height="13px">
-                                <path fill-rule="evenodd"  fill="rgb(25, 156, 224)"
-                                      d="M4.501,6.702 C3.379,6.702 2.469,5.766 2.469,4.612 C2.469,3.457 3.379,2.522 4.501,2.522 C5.622,2.522 6.532,3.458 6.532,4.612 C6.532,5.766 5.622,6.702 4.501,6.702 M4.501,0.004 C2.017,0.004 0.004,2.074 0.004,4.629 C0.004,7.042 2.041,10.154 3.400,11.670 C3.908,12.235 4.500,12.997 4.500,12.997 C4.500,12.997 5.136,12.231 5.681,11.649 C7.040,10.197 8.997,7.281 8.997,4.629 C8.997,2.074 6.984,0.004 4.501,0.004 "/>
-                            </svg>
-                        </div>
-                        <div class="txt">
-                            Ваш город:
-                        </div>
-                        <div class="txt-accent">
-                            <select name="city-select" class="vue-select" id="city-selectSteps">
-                                <option value="Екатеринбург">
-                                    Екатеринбург
-                                </option>
-                                <option value="Пермь">
-                                    Пермь
-                                </option>
-                                <option value="Казань">
-                                    Казань
-                                </option>
-                                <option value="Питер">
-                                    Питер
-                                </option>
-                                <option value="Москва">
-                                    Москва
-                                </option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="title-b">
                         Ваш заказ:
                     </div>
@@ -886,6 +865,184 @@
 
 
 <!--Modal for all pages start-->
+<div data-fancybox="" data-src="#citySelect">
+    <div id="citySelect" class="" style="display: none">
+        <div class="city-popup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="h2">
+                            Выберите свой город
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="h-city">
+                            <div class="group-i">
+                                <input type="text" onkeyup="filterCity(event)" class="js-selectcity" placeholder="Введите название своего города">
+                                <button class="btn-clear" onclick="clearFindCityInput();cityListInit();">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="11px" height="11px">
+                                        <path fill-rule="evenodd"  fill="rgb(190, 189, 189)"
+                                              d="M10.996,9.656 L9.652,10.999 L5.499,6.846 L1.346,10.999 L0.003,9.656 L4.156,5.503 L0.003,1.350 L1.346,0.006 L5.499,4.159 L9.652,0.006 L10.996,1.350 L6.843,5.503 L10.996,9.656 Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="tabs-city">
+                                <div class="tab-i active">
+                                    По алфавиту
+                                </div>
+                                <div class="tab-i">
+                                    По региону
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row city-tab-i js-char-bb active">
+                            <div class="col-12">
+                                <div class="js-scroll-city">
+                                    <div class="char-cc">
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                А
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Екатеринбург">
+                                            <div class="single-char">
+                                                Е
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "а" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                А
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-SingleChar = "б" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Б
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row city-tab-i js-char-bb">
+                            <div class="col-12">
+                                <div class="js-scroll-city">
+                                    <div class="char-cc">
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Абакан,Абинск,Агата,Агинское,Адлер,Адыгейск,Азов (Рост.),Алагир,Алапаевск,Алдан,Александров">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="char-c" data-region = "Пермский край" data-citylist="Бавлы,Байкальск,Баксан,Балашиха,Балашов,Балтийск,Баргузин,Барнаул,Батайск,Белгород">
+                                            <div class="single-char">
+                                                Пермский край
+                                            </div>
+                                            <div class="city-list">
+                                                <ul>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div data-fancybox="" data-src="#consult">
     <div id="consult" class="white-popup" style="display: none">
         <div class="container">

@@ -19,7 +19,7 @@ $(function() {
                 email: '',//email клиента
                 phone: '',//телефон клиента
                 city: 'Екатеринбург',//Город клиента
-                deliveryType: '',//тип доставки('Самовывоз', 'Доставка курьером')
+                deliveryType: 'Доставка курьером',//тип доставки('Самовывоз', 'Доставка курьером')
                 deliveryHouse: false, // Доставка до дома (курьером)
                 files: [],//прикрепленные файлы
                 deliveryAdress: { //адрес доставки
@@ -37,7 +37,7 @@ $(function() {
                 commentClient: '',
                 paymentType: 'Картой' // Способ оплаты,
             },
-            stepType: 'deliveryInfo',
+            stepType: 'contactInfo',
             deliveryCheckMode: false,
             selDelCity: 'Екатеринбург'.toUpperCase() //Местоположение офиса компании alarmTrade, город с которым идёт сравнение для вывода блока самовывоза, в шаблоне
         }, 
@@ -47,17 +47,24 @@ $(function() {
                 var str = this.orderInfo.transportCompanyInfo.companyName;
                 var result = str.match( /пункт/i ); /// Если есть слово "пункт"
 
+
+                // if(result !== null){
+                //     return false;
+                // }
+
                 if(!str){ // Если поле this.orderInfo.transportCompanyInfo.companyName не заполнено
                     result = false;
                 }else {
                     result = result !== null;
                 }
 
-
+                console.log('result1 = ', result);
 
                 if(this.orderInfo.deliveryHouse || result){
                     return true;
                 }
+
+                console.log('result2 = ', result);
 
                 return result;
             },
@@ -69,10 +76,22 @@ $(function() {
             * 4) Адрес доставки - showInputsSelfDelivery
             * 5) Добавить комментарий - showComment
             * 6) Выберите дату - showDate
-            * 7) Адрес самовывоза: (пункты выдачи)
+            * 7) Адрес самовывоза: (пункты выдачи) - showDelPoints
             * */
+            showDelPoints: function () {
+                var str = this.orderInfo.transportCompanyInfo.companyName;
+                var result = str.match( /пункт/i ); /// Если есть слово "пункт"
+
+                if(result !== null && this.orderInfo.city.toUpperCase() != this.selDelCity.toUpperCase()){
+                    return true;
+                }else {
+                    return false;
+                }
+            },
             showDate: function () {
-              if(this.showInputsSelfDelivery){
+              if( (   this.showInputsSelfDelivery
+                  || this.showTransCompany
+                  || this.showSelfOfice)){
                   return true;
               }else {
                   return false;
@@ -109,17 +128,16 @@ $(function() {
                 }
             },
             showInputsSelfDelivery: function () {
-                if( this.orderInfo.deliveryHouse
+                if( (this.orderInfo.deliveryHouse
                     && this.deliveryHouse
-                ){
+                    && !this.showDelPoints) || !this.showSelfOfice
+                   )
+                {
                     return true;
                 } else {
                     return false;
                 }
-
-
             }
-
         },
         methods: {
             setPaymentType: function (value) {
@@ -142,12 +160,12 @@ $(function() {
             changeDelivery: function (selectedCity) {
                 this.orderInfo.city = selectedCity;
 
-                if(selectedCity.toUpperCase() != 'Пермь'.toUpperCase()){
+                if(selectedCity.toUpperCase() != this.selDelCity.toUpperCase()){
                     this.orderInfo.deliveryType = 'Доставка курьером';
                     this.orderInfo.deliveryHouse = true;
                 }
 
-                if(selectedCity.toUpperCase() == 'Пермь'.toUpperCase() && this.orderInfo.deliveryHouse){
+                if(selectedCity.toUpperCase() == this.selDelCity.toUpperCase() && this.orderInfo.deliveryHouse){
                     $('#taxDel').click()
                 }
 
@@ -183,10 +201,11 @@ $(function() {
                     return false;
                 }
             },
-            //Проверка валидности шага "Способ доставки для Перми"
+            //Проверка валидности шага "Способ доставки для Ёбурга"
             getPermDeliveryValid: function () {
-                if(this.orderInfo.city.toUpperCase() == 'Пермь'.toUpperCase()){
-                    if(this.orderInfo.deliveryType.toUpperCase() != 'Самовывоз'.toUpperCase()){
+                console.log('getPermDeliveryValid start');
+                if(this.orderInfo.city.toUpperCase() == this.selDelCity.toUpperCase()){
+                    if(!this.showSelfOfice){
                         return (this.validTxtInput('#street')
                         && this.validTxtInput('#lit')
                         && this.validTxtInput('#house')
@@ -199,17 +218,29 @@ $(function() {
                 }else {
                     return true;
                 }
-
             },
             getNotPermDeliveryValid: function () {
                 this.deliveryCheckMode = true;
-                if(this.orderInfo.city.toUpperCase() != 'Пермь'.toUpperCase()){
-                    return this.orderInfo.transportCompanyInfo.companyName;
+                if(this.orderInfo.city.toUpperCase() != this.selDelCity.toUpperCase()){
+
+                    if(!this.showDelPoints){
+                        return (this.validTxtInput('#street')
+                            && this.validTxtInput('#lit')
+                            && this.validTxtInput('#house')
+                            && this.validTxtInput('#apartament')
+                            && this.validTxtInput('.delivery-step .datepicker-here')
+                            && !(this.deliveryCheckMode == true && !this.orderInfo.transportCompanyInfo.companyName)
+                        );
+                    } else {
+                        return this.validTxtInput('.delivery-step .datepicker-here');
+                    }
+
                 }else {
                     return true;
                 }
 
             },
+
             changeStepType: function (value, event) {
 
                 if(value != 'contactInfo'){
@@ -280,11 +311,11 @@ $(function() {
             });
 
             //Отслеживаем изменение select в блоке "Оформление заказа"
-            varthis.changeDelivery($('#city-selectSteps').val());
-            $('#city-selectSteps').change(function () {
-                var selectedCity = $(this).val().toUpperCase();
-                varthis.changeDelivery(selectedCity);
-            });
+            varthis.changeDelivery(localStorage.getItem("clientCity"));
+            // $('#city-selectSteps').change(function () {
+            //     var selectedCity = $(this).val().toUpperCase();
+            //     varthis.changeDelivery(selectedCity);
+            // });
 
             $('.transportAddress').change(function () {
                 if($(this).val().toUpperCase() != ''){

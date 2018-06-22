@@ -265,6 +265,9 @@ $(document).on('click', '.city-list ul li', function () {
     $('.city-list ul li').removeClass('active');
     $(this).addClass('active');
 
+
+
+
 });
 
 function cityListInit(){///Заполняет всплывашку  со списком городов
@@ -317,6 +320,10 @@ function setCity(cityVal){
     //Какой-нибудь запрос на сервер для установки нового города
 
     $('.js-setCity').text(cityVal);
+
+    //Записываем новый город в LocalStorage
+
+    localStorage.setItem('clientCity', cityVal);
 
     $.fancybox.close();
 
@@ -414,6 +421,11 @@ $(function() {
         contentTouchScroll: true,
         mouseWheel: true
     });
+
+    if(localStorage.getItem("clientCity") == null){
+        setCity('Екатеринбург');
+    }
+
     //city popup end
 
 
